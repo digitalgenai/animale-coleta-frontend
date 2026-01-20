@@ -82,23 +82,27 @@ const Usuarios = () => {
                 rowKey={"id"}
                 loading={usuariosFetching}
                 className="rounded-lg overflow-hidden shadow-xl"
-                showHeader={false}
+                // showHeader={false}
             >
                 <Table.Column
+                    title="Usuário"
                     render={(_, linha) => (
                         <div className="">
                             <div className="flex gap-4 items-center">
-                                <Tag color={'#002855'}>#{linha.id}</Tag>
+                                {/* <Tag color={'#002855'}>#{linha.id}</Tag> */}
                                 {
                                     linha.foto ? (
-                                        <Image src={linha.foto} className="w-10! h-10! rounded-full object-cover" />
+                                        <Image src={linha.foto} className="w-12! h-12! rounded-full object-cover" />
                                     ) : (
-                                        <div className="w-10 h-10 rounded-full bg-azul font-bold flex justify-center items-center text-white uppercase">
+                                        <div className="w-12 h-12 rounded-full bg-azul font-bold flex justify-center items-center text-white uppercase">
                                             {linha.nome.substring(0, 2)}
                                         </div>
                                     )
                                 }
-                                <div>{linha.nome}</div>
+                                <div className="leading-4">
+                                    <div className="text-lg leading-5">{linha.nome}</div>
+                                    <div>{linha.email}</div>
+                                </div>
                             </div>
                             <div className="flex justify-end gap-4">
                                 <Button

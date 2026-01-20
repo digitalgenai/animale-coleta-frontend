@@ -12,14 +12,14 @@ const Rotas = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Login />} />
-                <Route path="/recuperar" element={<Recuperar />} />
-                <Route path="/admin" element={<AdminLayout />}>
+                {/* <Route path="/" element={<Login />} />
+                <Route path="/recuperar" element={<Recuperar />} /> */}
+                <Route path="/" element={<AdminLayout />}>
                     <Route index element={<Painel />} />
-                    <Route path="/admin/usuarios" element={<Usuarios />} />
-                    <Route path="/admin/concorrentes" element={<Concorrentes />} />
-                    <Route path="/admin/produtos" element={<Produtos />} />
-                    <Route path="/admin/missoes" element={<Missao />} />
+                    <Route path="/usuarios" element={<Usuarios />} />
+                    <Route path="/concorrentes" element={<Concorrentes />} />
+                    <Route path="/produtos" element={<Produtos />} />
+                    <Route path="/missoes" element={<Missao />} />
                 </Route>
             </Routes>
         </BrowserRouter>

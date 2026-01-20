@@ -185,18 +185,17 @@ const Produtos = () => {
                 className="rounded-lg overflow-hidden shadow-xl"
                 // showHeader={false}
             >
-                <Table.Column 
+                {/* <Table.Column 
                     title="ID"
                     dataIndex={'id'}
                     key={'id'}
                     className="text-azul!"
-                />
+                /> */}
                 <Table.Column
                     title="Produto"
                     render={(_, linha) => (
                         <div className="">
                             <div className="flex gap-4 items-start">
-
                                 {
                                     linha.foto ? (
                                         <Image src={linha.foto} className="w-10! h-10! rounded-full object-cover" />
@@ -206,8 +205,8 @@ const Produtos = () => {
                                         </div>
                                     )
                                 }
-                                <div className="flex-1 text-stone-500 font-semibold">
-                                    <div className="text-lg text-azul">{linha.nome}</div>
+                                <div className="flex-1">
+                                    <div className="text-lg leading-5">{linha.nome}</div>
                                     <div className="">Preço base: R$ {Number(linha.preco).toFixed(2)}</div>
                                 </div>
                             </div>

@@ -93,17 +93,17 @@ const Concorrentes = () => {
 
                                 {
                                     linha.foto ? (
-                                        <Image src={linha.foto} className="w-10! h-10! rounded-full object-cover" />
+                                        <Image src={linha.foto} className="w-12! h-12! rounded-full object-cover" />
                                     ) : (
-                                        <div className="w-10 h-10 rounded-full bg-azul font-bold flex justify-center items-center text-white uppercase">
+                                        <div className="w-12 h-12 rounded-full bg-azul font-bold flex justify-center items-center text-white uppercase">
                                             {linha.nome.substring(0, 2)}
                                         </div>
                                     )
                                 }
-                                <div className="flex-1 text-stone-500">
+                                <div className="flex-1">
                                     <div className="flex justify-between h-10 items-center">
                                         <div className="text-lg">{linha.nome}</div>
-                                        <Tag color={linha.tipo == 'Online' ? '#EB9A00' : '#002855'} variant="outlined">{linha.tipo}</Tag>
+                                        <Tag color={linha.tipo == 'Online' ? '#EB9A00' : '#002855'} variant="outlined">Loja {linha.tipo}</Tag>
                                     </div>
                                     <div className="leading-4">
                                         <h6 className="text-azul font-bold">Endereço:</h6>
@@ -169,8 +169,8 @@ const Concorrentes = () => {
                             placeholder={'Escolha o tipo de loja'}
                             options={[
                                 {
-                                    label: 'Físico',
-                                    value: 'Físico'
+                                    label: 'Física',
+                                    value: 'Física'
                                 },
                                 {
                                     label: 'Online',
@@ -250,8 +250,8 @@ const Concorrentes = () => {
                         <Select
                             options={[
                                 {
-                                    label: 'Físico',
-                                    value: 'Físico'
+                                    label: 'Física',
+                                    value: 'Física'
                                 },
                                 {
                                     label: 'Online',
