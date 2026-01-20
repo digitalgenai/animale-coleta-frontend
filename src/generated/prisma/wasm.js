@@ -117,6 +117,20 @@ exports.Prisma.ProdutoScalarFieldEnum = {
   foto: 'foto'
 };
 
+exports.Prisma.MissaoScalarFieldEnum = {
+  id: 'id',
+  titulo: 'titulo',
+  status: 'status',
+  criadaEm: 'criadaEm',
+  concorrenteId: 'concorrenteId'
+};
+
+exports.Prisma.MissaoProdutoScalarFieldEnum = {
+  id: 'id',
+  missaoId: 'missaoId',
+  produtoId: 'produtoId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -136,7 +150,9 @@ exports.Prisma.NullsOrder = {
 exports.Prisma.ModelName = {
   Usuario: 'Usuario',
   Concorrente: 'Concorrente',
-  Produto: 'Produto'
+  Produto: 'Produto',
+  Missao: 'Missao',
+  MissaoProduto: 'MissaoProduto'
 };
 /**
  * Create the Client
@@ -177,7 +193,6 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -186,13 +201,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Usuario {\n  id    Int     @id @default(autoincrement())\n  nome  String\n  email String  @unique\n  senha String\n  foto  String?\n\n  @@map(\"usuarios\")\n}\n\nmodel Concorrente {\n  id       Int     @id @default(autoincrement())\n  nome     String\n  tipo     String\n  endereco String\n  foto     String?\n\n  @@map(\"concorrentes\")\n}\n\nmodel Produto {\n  id     Int     @id @default(autoincrement())\n  nome   String\n  codigo String?\n  preco  Float\n  foto   String?\n\n  @@map(\"produtos\")\n}\n",
-  "inlineSchemaHash": "dccf0c950c1d333b3e5fc477c27e31b1afc5321a664f20d8ac1224dd5aa0d7e6",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Usuario {\n  id    Int     @id @default(autoincrement())\n  nome  String\n  email String  @unique\n  senha String\n  foto  String?\n\n  @@map(\"usuarios\")\n}\n\nmodel Concorrente {\n  id       Int     @id @default(autoincrement())\n  nome     String\n  tipo     String\n  endereco String\n  foto     String?\n\n  missoes Missao[]\n\n  @@map(\"concorrentes\")\n}\n\nmodel Produto {\n  id     Int     @id @default(autoincrement())\n  nome   String\n  codigo String?\n  preco  Float\n  foto   String?\n\n  missoes MissaoProduto[]\n\n  @@map(\"produtos\")\n}\n\nmodel Missao {\n  id       Int      @id @default(autoincrement())\n  titulo   String\n  status   String   @default(\"pendente\")\n  criadaEm DateTime @default(now())\n\n  concorrenteId Int\n  concorrente   Concorrente @relation(fields: [concorrenteId], references: [id])\n\n  produtos MissaoProduto[]\n\n  @@map(\"missoes\")\n}\n\nmodel MissaoProduto {\n  id Int @id @default(autoincrement())\n\n  missaoId  Int\n  produtoId Int\n\n  missao  Missao  @relation(fields: [missaoId], references: [id])\n  produto Produto @relation(fields: [produtoId], references: [id])\n\n  @@unique([missaoId, produtoId])\n  @@map(\"missao_produtos\")\n}\n",
+  "inlineSchemaHash": "1ad2ea1be54c5015aad7b5c78e24538f42682840119cd66e0e19c523a33bcdaa",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"Usuario\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"nome\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"senha\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"foto\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":\"usuarios\"},\"Concorrente\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"nome\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"tipo\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"endereco\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"foto\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":\"concorrentes\"},\"Produto\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"nome\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"codigo\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"preco\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"foto\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":\"produtos\"}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"Usuario\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"nome\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"senha\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"foto\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":\"usuarios\"},\"Concorrente\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"nome\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"tipo\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"endereco\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"foto\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"missoes\",\"kind\":\"object\",\"type\":\"Missao\",\"relationName\":\"ConcorrenteToMissao\"}],\"dbName\":\"concorrentes\"},\"Produto\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"nome\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"codigo\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"preco\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"foto\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"missoes\",\"kind\":\"object\",\"type\":\"MissaoProduto\",\"relationName\":\"MissaoProdutoToProduto\"}],\"dbName\":\"produtos\"},\"Missao\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"titulo\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"criadaEm\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"concorrenteId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"concorrente\",\"kind\":\"object\",\"type\":\"Concorrente\",\"relationName\":\"ConcorrenteToMissao\"},{\"name\":\"produtos\",\"kind\":\"object\",\"type\":\"MissaoProduto\",\"relationName\":\"MissaoToMissaoProduto\"}],\"dbName\":\"missoes\"},\"MissaoProduto\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"missaoId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"produtoId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"missao\",\"kind\":\"object\",\"type\":\"Missao\",\"relationName\":\"MissaoToMissaoProduto\"},{\"name\":\"produto\",\"kind\":\"object\",\"type\":\"Produto\",\"relationName\":\"MissaoProdutoToProduto\"}],\"dbName\":\"missao_produtos\"}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),

@@ -28,6 +28,16 @@ export type Concorrente = $Result.DefaultSelection<Prisma.$ConcorrentePayload>
  * 
  */
 export type Produto = $Result.DefaultSelection<Prisma.$ProdutoPayload>
+/**
+ * Model Missao
+ * 
+ */
+export type Missao = $Result.DefaultSelection<Prisma.$MissaoPayload>
+/**
+ * Model MissaoProduto
+ * 
+ */
+export type MissaoProduto = $Result.DefaultSelection<Prisma.$MissaoProdutoPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -176,6 +186,26 @@ export class PrismaClient<
     * ```
     */
   get produto(): Prisma.ProdutoDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.missao`: Exposes CRUD operations for the **Missao** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Missaos
+    * const missaos = await prisma.missao.findMany()
+    * ```
+    */
+  get missao(): Prisma.MissaoDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.missaoProduto`: Exposes CRUD operations for the **MissaoProduto** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MissaoProdutos
+    * const missaoProdutos = await prisma.missaoProduto.findMany()
+    * ```
+    */
+  get missaoProduto(): Prisma.MissaoProdutoDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -619,7 +649,9 @@ export namespace Prisma {
   export const ModelName: {
     Usuario: 'Usuario',
     Concorrente: 'Concorrente',
-    Produto: 'Produto'
+    Produto: 'Produto',
+    Missao: 'Missao',
+    MissaoProduto: 'MissaoProduto'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -638,7 +670,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "usuario" | "concorrente" | "produto"
+      modelProps: "usuario" | "concorrente" | "produto" | "missao" | "missaoProduto"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -864,6 +896,154 @@ export namespace Prisma {
           }
         }
       }
+      Missao: {
+        payload: Prisma.$MissaoPayload<ExtArgs>
+        fields: Prisma.MissaoFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MissaoFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MissaoPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MissaoFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MissaoPayload>
+          }
+          findFirst: {
+            args: Prisma.MissaoFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MissaoPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MissaoFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MissaoPayload>
+          }
+          findMany: {
+            args: Prisma.MissaoFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MissaoPayload>[]
+          }
+          create: {
+            args: Prisma.MissaoCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MissaoPayload>
+          }
+          createMany: {
+            args: Prisma.MissaoCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MissaoCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MissaoPayload>[]
+          }
+          delete: {
+            args: Prisma.MissaoDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MissaoPayload>
+          }
+          update: {
+            args: Prisma.MissaoUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MissaoPayload>
+          }
+          deleteMany: {
+            args: Prisma.MissaoDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MissaoUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MissaoUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MissaoPayload>[]
+          }
+          upsert: {
+            args: Prisma.MissaoUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MissaoPayload>
+          }
+          aggregate: {
+            args: Prisma.MissaoAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMissao>
+          }
+          groupBy: {
+            args: Prisma.MissaoGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MissaoGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MissaoCountArgs<ExtArgs>
+            result: $Utils.Optional<MissaoCountAggregateOutputType> | number
+          }
+        }
+      }
+      MissaoProduto: {
+        payload: Prisma.$MissaoProdutoPayload<ExtArgs>
+        fields: Prisma.MissaoProdutoFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MissaoProdutoFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MissaoProdutoPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MissaoProdutoFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MissaoProdutoPayload>
+          }
+          findFirst: {
+            args: Prisma.MissaoProdutoFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MissaoProdutoPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MissaoProdutoFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MissaoProdutoPayload>
+          }
+          findMany: {
+            args: Prisma.MissaoProdutoFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MissaoProdutoPayload>[]
+          }
+          create: {
+            args: Prisma.MissaoProdutoCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MissaoProdutoPayload>
+          }
+          createMany: {
+            args: Prisma.MissaoProdutoCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MissaoProdutoCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MissaoProdutoPayload>[]
+          }
+          delete: {
+            args: Prisma.MissaoProdutoDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MissaoProdutoPayload>
+          }
+          update: {
+            args: Prisma.MissaoProdutoUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MissaoProdutoPayload>
+          }
+          deleteMany: {
+            args: Prisma.MissaoProdutoDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MissaoProdutoUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MissaoProdutoUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MissaoProdutoPayload>[]
+          }
+          upsert: {
+            args: Prisma.MissaoProdutoUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MissaoProdutoPayload>
+          }
+          aggregate: {
+            args: Prisma.MissaoProdutoAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMissaoProduto>
+          }
+          groupBy: {
+            args: Prisma.MissaoProdutoGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MissaoProdutoGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MissaoProdutoCountArgs<ExtArgs>
+            result: $Utils.Optional<MissaoProdutoCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -963,6 +1143,8 @@ export namespace Prisma {
     usuario?: UsuarioOmit
     concorrente?: ConcorrenteOmit
     produto?: ProdutoOmit
+    missao?: MissaoOmit
+    missaoProduto?: MissaoProdutoOmit
   }
 
   /* Types for Logging */
@@ -1037,6 +1219,98 @@ export namespace Prisma {
    * Count Types
    */
 
+
+  /**
+   * Count Type ConcorrenteCountOutputType
+   */
+
+  export type ConcorrenteCountOutputType = {
+    missoes: number
+  }
+
+  export type ConcorrenteCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    missoes?: boolean | ConcorrenteCountOutputTypeCountMissoesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ConcorrenteCountOutputType without action
+   */
+  export type ConcorrenteCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConcorrenteCountOutputType
+     */
+    select?: ConcorrenteCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ConcorrenteCountOutputType without action
+   */
+  export type ConcorrenteCountOutputTypeCountMissoesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MissaoWhereInput
+  }
+
+
+  /**
+   * Count Type ProdutoCountOutputType
+   */
+
+  export type ProdutoCountOutputType = {
+    missoes: number
+  }
+
+  export type ProdutoCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    missoes?: boolean | ProdutoCountOutputTypeCountMissoesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ProdutoCountOutputType without action
+   */
+  export type ProdutoCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProdutoCountOutputType
+     */
+    select?: ProdutoCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ProdutoCountOutputType without action
+   */
+  export type ProdutoCountOutputTypeCountMissoesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MissaoProdutoWhereInput
+  }
+
+
+  /**
+   * Count Type MissaoCountOutputType
+   */
+
+  export type MissaoCountOutputType = {
+    produtos: number
+  }
+
+  export type MissaoCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    produtos?: boolean | MissaoCountOutputTypeCountProdutosArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * MissaoCountOutputType without action
+   */
+  export type MissaoCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MissaoCountOutputType
+     */
+    select?: MissaoCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * MissaoCountOutputType without action
+   */
+  export type MissaoCountOutputTypeCountProdutosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MissaoProdutoWhereInput
+  }
 
 
   /**
@@ -2270,6 +2544,8 @@ export namespace Prisma {
     tipo?: boolean
     endereco?: boolean
     foto?: boolean
+    missoes?: boolean | Concorrente$missoesArgs<ExtArgs>
+    _count?: boolean | ConcorrenteCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["concorrente"]>
 
   export type ConcorrenteSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2297,10 +2573,18 @@ export namespace Prisma {
   }
 
   export type ConcorrenteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "tipo" | "endereco" | "foto", ExtArgs["result"]["concorrente"]>
+  export type ConcorrenteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    missoes?: boolean | Concorrente$missoesArgs<ExtArgs>
+    _count?: boolean | ConcorrenteCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ConcorrenteIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type ConcorrenteIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $ConcorrentePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Concorrente"
-    objects: {}
+    objects: {
+      missoes: Prisma.$MissaoPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       nome: string
@@ -2701,6 +2985,7 @@ export namespace Prisma {
    */
   export interface Prisma__ConcorrenteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    missoes<T extends Concorrente$missoesArgs<ExtArgs> = {}>(args?: Subset<T, Concorrente$missoesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MissaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2752,6 +3037,10 @@ export namespace Prisma {
      */
     omit?: ConcorrenteOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConcorrenteInclude<ExtArgs> | null
+    /**
      * Filter, which Concorrente to fetch.
      */
     where: ConcorrenteWhereUniqueInput
@@ -2770,6 +3059,10 @@ export namespace Prisma {
      */
     omit?: ConcorrenteOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConcorrenteInclude<ExtArgs> | null
+    /**
      * Filter, which Concorrente to fetch.
      */
     where: ConcorrenteWhereUniqueInput
@@ -2787,6 +3080,10 @@ export namespace Prisma {
      * Omit specific fields from the Concorrente
      */
     omit?: ConcorrenteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConcorrenteInclude<ExtArgs> | null
     /**
      * Filter, which Concorrente to fetch.
      */
@@ -2836,6 +3133,10 @@ export namespace Prisma {
      */
     omit?: ConcorrenteOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConcorrenteInclude<ExtArgs> | null
+    /**
      * Filter, which Concorrente to fetch.
      */
     where?: ConcorrenteWhereInput
@@ -2884,6 +3185,10 @@ export namespace Prisma {
      */
     omit?: ConcorrenteOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConcorrenteInclude<ExtArgs> | null
+    /**
      * Filter, which Concorrentes to fetch.
      */
     where?: ConcorrenteWhereInput
@@ -2926,6 +3231,10 @@ export namespace Prisma {
      * Omit specific fields from the Concorrente
      */
     omit?: ConcorrenteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConcorrenteInclude<ExtArgs> | null
     /**
      * The data needed to create a Concorrente.
      */
@@ -2974,6 +3283,10 @@ export namespace Prisma {
      * Omit specific fields from the Concorrente
      */
     omit?: ConcorrenteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConcorrenteInclude<ExtArgs> | null
     /**
      * The data needed to update a Concorrente.
      */
@@ -3041,6 +3354,10 @@ export namespace Prisma {
      */
     omit?: ConcorrenteOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConcorrenteInclude<ExtArgs> | null
+    /**
      * The filter to search for the Concorrente to update in case it exists.
      */
     where: ConcorrenteWhereUniqueInput
@@ -3067,6 +3384,10 @@ export namespace Prisma {
      */
     omit?: ConcorrenteOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConcorrenteInclude<ExtArgs> | null
+    /**
      * Filter which Concorrente to delete.
      */
     where: ConcorrenteWhereUniqueInput
@@ -3087,6 +3408,30 @@ export namespace Prisma {
   }
 
   /**
+   * Concorrente.missoes
+   */
+  export type Concorrente$missoesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Missao
+     */
+    select?: MissaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Missao
+     */
+    omit?: MissaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MissaoInclude<ExtArgs> | null
+    where?: MissaoWhereInput
+    orderBy?: MissaoOrderByWithRelationInput | MissaoOrderByWithRelationInput[]
+    cursor?: MissaoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MissaoScalarFieldEnum | MissaoScalarFieldEnum[]
+  }
+
+  /**
    * Concorrente without action
    */
   export type ConcorrenteDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3098,6 +3443,10 @@ export namespace Prisma {
      * Omit specific fields from the Concorrente
      */
     omit?: ConcorrenteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConcorrenteInclude<ExtArgs> | null
   }
 
 
@@ -3303,6 +3652,8 @@ export namespace Prisma {
     codigo?: boolean
     preco?: boolean
     foto?: boolean
+    missoes?: boolean | Produto$missoesArgs<ExtArgs>
+    _count?: boolean | ProdutoCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["produto"]>
 
   export type ProdutoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3330,10 +3681,18 @@ export namespace Prisma {
   }
 
   export type ProdutoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "codigo" | "preco" | "foto", ExtArgs["result"]["produto"]>
+  export type ProdutoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    missoes?: boolean | Produto$missoesArgs<ExtArgs>
+    _count?: boolean | ProdutoCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ProdutoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type ProdutoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $ProdutoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Produto"
-    objects: {}
+    objects: {
+      missoes: Prisma.$MissaoProdutoPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       nome: string
@@ -3734,6 +4093,7 @@ export namespace Prisma {
    */
   export interface Prisma__ProdutoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    missoes<T extends Produto$missoesArgs<ExtArgs> = {}>(args?: Subset<T, Produto$missoesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MissaoProdutoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3785,6 +4145,10 @@ export namespace Prisma {
      */
     omit?: ProdutoOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProdutoInclude<ExtArgs> | null
+    /**
      * Filter, which Produto to fetch.
      */
     where: ProdutoWhereUniqueInput
@@ -3803,6 +4167,10 @@ export namespace Prisma {
      */
     omit?: ProdutoOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProdutoInclude<ExtArgs> | null
+    /**
      * Filter, which Produto to fetch.
      */
     where: ProdutoWhereUniqueInput
@@ -3820,6 +4188,10 @@ export namespace Prisma {
      * Omit specific fields from the Produto
      */
     omit?: ProdutoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProdutoInclude<ExtArgs> | null
     /**
      * Filter, which Produto to fetch.
      */
@@ -3869,6 +4241,10 @@ export namespace Prisma {
      */
     omit?: ProdutoOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProdutoInclude<ExtArgs> | null
+    /**
      * Filter, which Produto to fetch.
      */
     where?: ProdutoWhereInput
@@ -3917,6 +4293,10 @@ export namespace Prisma {
      */
     omit?: ProdutoOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProdutoInclude<ExtArgs> | null
+    /**
      * Filter, which Produtos to fetch.
      */
     where?: ProdutoWhereInput
@@ -3959,6 +4339,10 @@ export namespace Prisma {
      * Omit specific fields from the Produto
      */
     omit?: ProdutoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProdutoInclude<ExtArgs> | null
     /**
      * The data needed to create a Produto.
      */
@@ -4007,6 +4391,10 @@ export namespace Prisma {
      * Omit specific fields from the Produto
      */
     omit?: ProdutoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProdutoInclude<ExtArgs> | null
     /**
      * The data needed to update a Produto.
      */
@@ -4074,6 +4462,10 @@ export namespace Prisma {
      */
     omit?: ProdutoOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProdutoInclude<ExtArgs> | null
+    /**
      * The filter to search for the Produto to update in case it exists.
      */
     where: ProdutoWhereUniqueInput
@@ -4100,6 +4492,10 @@ export namespace Prisma {
      */
     omit?: ProdutoOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProdutoInclude<ExtArgs> | null
+    /**
      * Filter which Produto to delete.
      */
     where: ProdutoWhereUniqueInput
@@ -4120,6 +4516,30 @@ export namespace Prisma {
   }
 
   /**
+   * Produto.missoes
+   */
+  export type Produto$missoesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MissaoProduto
+     */
+    select?: MissaoProdutoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MissaoProduto
+     */
+    omit?: MissaoProdutoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MissaoProdutoInclude<ExtArgs> | null
+    where?: MissaoProdutoWhereInput
+    orderBy?: MissaoProdutoOrderByWithRelationInput | MissaoProdutoOrderByWithRelationInput[]
+    cursor?: MissaoProdutoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MissaoProdutoScalarFieldEnum | MissaoProdutoScalarFieldEnum[]
+  }
+
+  /**
    * Produto without action
    */
   export type ProdutoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4131,6 +4551,2218 @@ export namespace Prisma {
      * Omit specific fields from the Produto
      */
     omit?: ProdutoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProdutoInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Missao
+   */
+
+  export type AggregateMissao = {
+    _count: MissaoCountAggregateOutputType | null
+    _avg: MissaoAvgAggregateOutputType | null
+    _sum: MissaoSumAggregateOutputType | null
+    _min: MissaoMinAggregateOutputType | null
+    _max: MissaoMaxAggregateOutputType | null
+  }
+
+  export type MissaoAvgAggregateOutputType = {
+    id: number | null
+    concorrenteId: number | null
+  }
+
+  export type MissaoSumAggregateOutputType = {
+    id: number | null
+    concorrenteId: number | null
+  }
+
+  export type MissaoMinAggregateOutputType = {
+    id: number | null
+    titulo: string | null
+    status: string | null
+    criadaEm: Date | null
+    concorrenteId: number | null
+  }
+
+  export type MissaoMaxAggregateOutputType = {
+    id: number | null
+    titulo: string | null
+    status: string | null
+    criadaEm: Date | null
+    concorrenteId: number | null
+  }
+
+  export type MissaoCountAggregateOutputType = {
+    id: number
+    titulo: number
+    status: number
+    criadaEm: number
+    concorrenteId: number
+    _all: number
+  }
+
+
+  export type MissaoAvgAggregateInputType = {
+    id?: true
+    concorrenteId?: true
+  }
+
+  export type MissaoSumAggregateInputType = {
+    id?: true
+    concorrenteId?: true
+  }
+
+  export type MissaoMinAggregateInputType = {
+    id?: true
+    titulo?: true
+    status?: true
+    criadaEm?: true
+    concorrenteId?: true
+  }
+
+  export type MissaoMaxAggregateInputType = {
+    id?: true
+    titulo?: true
+    status?: true
+    criadaEm?: true
+    concorrenteId?: true
+  }
+
+  export type MissaoCountAggregateInputType = {
+    id?: true
+    titulo?: true
+    status?: true
+    criadaEm?: true
+    concorrenteId?: true
+    _all?: true
+  }
+
+  export type MissaoAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Missao to aggregate.
+     */
+    where?: MissaoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Missaos to fetch.
+     */
+    orderBy?: MissaoOrderByWithRelationInput | MissaoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MissaoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Missaos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Missaos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Missaos
+    **/
+    _count?: true | MissaoCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: MissaoAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: MissaoSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MissaoMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MissaoMaxAggregateInputType
+  }
+
+  export type GetMissaoAggregateType<T extends MissaoAggregateArgs> = {
+        [P in keyof T & keyof AggregateMissao]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMissao[P]>
+      : GetScalarType<T[P], AggregateMissao[P]>
+  }
+
+
+
+
+  export type MissaoGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MissaoWhereInput
+    orderBy?: MissaoOrderByWithAggregationInput | MissaoOrderByWithAggregationInput[]
+    by: MissaoScalarFieldEnum[] | MissaoScalarFieldEnum
+    having?: MissaoScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MissaoCountAggregateInputType | true
+    _avg?: MissaoAvgAggregateInputType
+    _sum?: MissaoSumAggregateInputType
+    _min?: MissaoMinAggregateInputType
+    _max?: MissaoMaxAggregateInputType
+  }
+
+  export type MissaoGroupByOutputType = {
+    id: number
+    titulo: string
+    status: string
+    criadaEm: Date
+    concorrenteId: number
+    _count: MissaoCountAggregateOutputType | null
+    _avg: MissaoAvgAggregateOutputType | null
+    _sum: MissaoSumAggregateOutputType | null
+    _min: MissaoMinAggregateOutputType | null
+    _max: MissaoMaxAggregateOutputType | null
+  }
+
+  type GetMissaoGroupByPayload<T extends MissaoGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MissaoGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MissaoGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MissaoGroupByOutputType[P]>
+            : GetScalarType<T[P], MissaoGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MissaoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    titulo?: boolean
+    status?: boolean
+    criadaEm?: boolean
+    concorrenteId?: boolean
+    concorrente?: boolean | ConcorrenteDefaultArgs<ExtArgs>
+    produtos?: boolean | Missao$produtosArgs<ExtArgs>
+    _count?: boolean | MissaoCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["missao"]>
+
+  export type MissaoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    titulo?: boolean
+    status?: boolean
+    criadaEm?: boolean
+    concorrenteId?: boolean
+    concorrente?: boolean | ConcorrenteDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["missao"]>
+
+  export type MissaoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    titulo?: boolean
+    status?: boolean
+    criadaEm?: boolean
+    concorrenteId?: boolean
+    concorrente?: boolean | ConcorrenteDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["missao"]>
+
+  export type MissaoSelectScalar = {
+    id?: boolean
+    titulo?: boolean
+    status?: boolean
+    criadaEm?: boolean
+    concorrenteId?: boolean
+  }
+
+  export type MissaoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titulo" | "status" | "criadaEm" | "concorrenteId", ExtArgs["result"]["missao"]>
+  export type MissaoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    concorrente?: boolean | ConcorrenteDefaultArgs<ExtArgs>
+    produtos?: boolean | Missao$produtosArgs<ExtArgs>
+    _count?: boolean | MissaoCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type MissaoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    concorrente?: boolean | ConcorrenteDefaultArgs<ExtArgs>
+  }
+  export type MissaoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    concorrente?: boolean | ConcorrenteDefaultArgs<ExtArgs>
+  }
+
+  export type $MissaoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Missao"
+    objects: {
+      concorrente: Prisma.$ConcorrentePayload<ExtArgs>
+      produtos: Prisma.$MissaoProdutoPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      titulo: string
+      status: string
+      criadaEm: Date
+      concorrenteId: number
+    }, ExtArgs["result"]["missao"]>
+    composites: {}
+  }
+
+  type MissaoGetPayload<S extends boolean | null | undefined | MissaoDefaultArgs> = $Result.GetResult<Prisma.$MissaoPayload, S>
+
+  type MissaoCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MissaoFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MissaoCountAggregateInputType | true
+    }
+
+  export interface MissaoDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Missao'], meta: { name: 'Missao' } }
+    /**
+     * Find zero or one Missao that matches the filter.
+     * @param {MissaoFindUniqueArgs} args - Arguments to find a Missao
+     * @example
+     * // Get one Missao
+     * const missao = await prisma.missao.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MissaoFindUniqueArgs>(args: SelectSubset<T, MissaoFindUniqueArgs<ExtArgs>>): Prisma__MissaoClient<$Result.GetResult<Prisma.$MissaoPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Missao that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MissaoFindUniqueOrThrowArgs} args - Arguments to find a Missao
+     * @example
+     * // Get one Missao
+     * const missao = await prisma.missao.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MissaoFindUniqueOrThrowArgs>(args: SelectSubset<T, MissaoFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MissaoClient<$Result.GetResult<Prisma.$MissaoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Missao that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MissaoFindFirstArgs} args - Arguments to find a Missao
+     * @example
+     * // Get one Missao
+     * const missao = await prisma.missao.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MissaoFindFirstArgs>(args?: SelectSubset<T, MissaoFindFirstArgs<ExtArgs>>): Prisma__MissaoClient<$Result.GetResult<Prisma.$MissaoPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Missao that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MissaoFindFirstOrThrowArgs} args - Arguments to find a Missao
+     * @example
+     * // Get one Missao
+     * const missao = await prisma.missao.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MissaoFindFirstOrThrowArgs>(args?: SelectSubset<T, MissaoFindFirstOrThrowArgs<ExtArgs>>): Prisma__MissaoClient<$Result.GetResult<Prisma.$MissaoPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Missaos that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MissaoFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Missaos
+     * const missaos = await prisma.missao.findMany()
+     * 
+     * // Get first 10 Missaos
+     * const missaos = await prisma.missao.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const missaoWithIdOnly = await prisma.missao.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MissaoFindManyArgs>(args?: SelectSubset<T, MissaoFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MissaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Missao.
+     * @param {MissaoCreateArgs} args - Arguments to create a Missao.
+     * @example
+     * // Create one Missao
+     * const Missao = await prisma.missao.create({
+     *   data: {
+     *     // ... data to create a Missao
+     *   }
+     * })
+     * 
+     */
+    create<T extends MissaoCreateArgs>(args: SelectSubset<T, MissaoCreateArgs<ExtArgs>>): Prisma__MissaoClient<$Result.GetResult<Prisma.$MissaoPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Missaos.
+     * @param {MissaoCreateManyArgs} args - Arguments to create many Missaos.
+     * @example
+     * // Create many Missaos
+     * const missao = await prisma.missao.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MissaoCreateManyArgs>(args?: SelectSubset<T, MissaoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Missaos and returns the data saved in the database.
+     * @param {MissaoCreateManyAndReturnArgs} args - Arguments to create many Missaos.
+     * @example
+     * // Create many Missaos
+     * const missao = await prisma.missao.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Missaos and only return the `id`
+     * const missaoWithIdOnly = await prisma.missao.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MissaoCreateManyAndReturnArgs>(args?: SelectSubset<T, MissaoCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MissaoPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Missao.
+     * @param {MissaoDeleteArgs} args - Arguments to delete one Missao.
+     * @example
+     * // Delete one Missao
+     * const Missao = await prisma.missao.delete({
+     *   where: {
+     *     // ... filter to delete one Missao
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MissaoDeleteArgs>(args: SelectSubset<T, MissaoDeleteArgs<ExtArgs>>): Prisma__MissaoClient<$Result.GetResult<Prisma.$MissaoPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Missao.
+     * @param {MissaoUpdateArgs} args - Arguments to update one Missao.
+     * @example
+     * // Update one Missao
+     * const missao = await prisma.missao.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MissaoUpdateArgs>(args: SelectSubset<T, MissaoUpdateArgs<ExtArgs>>): Prisma__MissaoClient<$Result.GetResult<Prisma.$MissaoPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Missaos.
+     * @param {MissaoDeleteManyArgs} args - Arguments to filter Missaos to delete.
+     * @example
+     * // Delete a few Missaos
+     * const { count } = await prisma.missao.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MissaoDeleteManyArgs>(args?: SelectSubset<T, MissaoDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Missaos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MissaoUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Missaos
+     * const missao = await prisma.missao.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MissaoUpdateManyArgs>(args: SelectSubset<T, MissaoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Missaos and returns the data updated in the database.
+     * @param {MissaoUpdateManyAndReturnArgs} args - Arguments to update many Missaos.
+     * @example
+     * // Update many Missaos
+     * const missao = await prisma.missao.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Missaos and only return the `id`
+     * const missaoWithIdOnly = await prisma.missao.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MissaoUpdateManyAndReturnArgs>(args: SelectSubset<T, MissaoUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MissaoPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Missao.
+     * @param {MissaoUpsertArgs} args - Arguments to update or create a Missao.
+     * @example
+     * // Update or create a Missao
+     * const missao = await prisma.missao.upsert({
+     *   create: {
+     *     // ... data to create a Missao
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Missao we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MissaoUpsertArgs>(args: SelectSubset<T, MissaoUpsertArgs<ExtArgs>>): Prisma__MissaoClient<$Result.GetResult<Prisma.$MissaoPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Missaos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MissaoCountArgs} args - Arguments to filter Missaos to count.
+     * @example
+     * // Count the number of Missaos
+     * const count = await prisma.missao.count({
+     *   where: {
+     *     // ... the filter for the Missaos we want to count
+     *   }
+     * })
+    **/
+    count<T extends MissaoCountArgs>(
+      args?: Subset<T, MissaoCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MissaoCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Missao.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MissaoAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MissaoAggregateArgs>(args: Subset<T, MissaoAggregateArgs>): Prisma.PrismaPromise<GetMissaoAggregateType<T>>
+
+    /**
+     * Group by Missao.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MissaoGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MissaoGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MissaoGroupByArgs['orderBy'] }
+        : { orderBy?: MissaoGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MissaoGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMissaoGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Missao model
+   */
+  readonly fields: MissaoFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Missao.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MissaoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    concorrente<T extends ConcorrenteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ConcorrenteDefaultArgs<ExtArgs>>): Prisma__ConcorrenteClient<$Result.GetResult<Prisma.$ConcorrentePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    produtos<T extends Missao$produtosArgs<ExtArgs> = {}>(args?: Subset<T, Missao$produtosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MissaoProdutoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Missao model
+   */
+  interface MissaoFieldRefs {
+    readonly id: FieldRef<"Missao", 'Int'>
+    readonly titulo: FieldRef<"Missao", 'String'>
+    readonly status: FieldRef<"Missao", 'String'>
+    readonly criadaEm: FieldRef<"Missao", 'DateTime'>
+    readonly concorrenteId: FieldRef<"Missao", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Missao findUnique
+   */
+  export type MissaoFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Missao
+     */
+    select?: MissaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Missao
+     */
+    omit?: MissaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MissaoInclude<ExtArgs> | null
+    /**
+     * Filter, which Missao to fetch.
+     */
+    where: MissaoWhereUniqueInput
+  }
+
+  /**
+   * Missao findUniqueOrThrow
+   */
+  export type MissaoFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Missao
+     */
+    select?: MissaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Missao
+     */
+    omit?: MissaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MissaoInclude<ExtArgs> | null
+    /**
+     * Filter, which Missao to fetch.
+     */
+    where: MissaoWhereUniqueInput
+  }
+
+  /**
+   * Missao findFirst
+   */
+  export type MissaoFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Missao
+     */
+    select?: MissaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Missao
+     */
+    omit?: MissaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MissaoInclude<ExtArgs> | null
+    /**
+     * Filter, which Missao to fetch.
+     */
+    where?: MissaoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Missaos to fetch.
+     */
+    orderBy?: MissaoOrderByWithRelationInput | MissaoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Missaos.
+     */
+    cursor?: MissaoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Missaos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Missaos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Missaos.
+     */
+    distinct?: MissaoScalarFieldEnum | MissaoScalarFieldEnum[]
+  }
+
+  /**
+   * Missao findFirstOrThrow
+   */
+  export type MissaoFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Missao
+     */
+    select?: MissaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Missao
+     */
+    omit?: MissaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MissaoInclude<ExtArgs> | null
+    /**
+     * Filter, which Missao to fetch.
+     */
+    where?: MissaoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Missaos to fetch.
+     */
+    orderBy?: MissaoOrderByWithRelationInput | MissaoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Missaos.
+     */
+    cursor?: MissaoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Missaos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Missaos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Missaos.
+     */
+    distinct?: MissaoScalarFieldEnum | MissaoScalarFieldEnum[]
+  }
+
+  /**
+   * Missao findMany
+   */
+  export type MissaoFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Missao
+     */
+    select?: MissaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Missao
+     */
+    omit?: MissaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MissaoInclude<ExtArgs> | null
+    /**
+     * Filter, which Missaos to fetch.
+     */
+    where?: MissaoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Missaos to fetch.
+     */
+    orderBy?: MissaoOrderByWithRelationInput | MissaoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Missaos.
+     */
+    cursor?: MissaoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Missaos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Missaos.
+     */
+    skip?: number
+    distinct?: MissaoScalarFieldEnum | MissaoScalarFieldEnum[]
+  }
+
+  /**
+   * Missao create
+   */
+  export type MissaoCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Missao
+     */
+    select?: MissaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Missao
+     */
+    omit?: MissaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MissaoInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Missao.
+     */
+    data: XOR<MissaoCreateInput, MissaoUncheckedCreateInput>
+  }
+
+  /**
+   * Missao createMany
+   */
+  export type MissaoCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Missaos.
+     */
+    data: MissaoCreateManyInput | MissaoCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Missao createManyAndReturn
+   */
+  export type MissaoCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Missao
+     */
+    select?: MissaoSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Missao
+     */
+    omit?: MissaoOmit<ExtArgs> | null
+    /**
+     * The data used to create many Missaos.
+     */
+    data: MissaoCreateManyInput | MissaoCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MissaoIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Missao update
+   */
+  export type MissaoUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Missao
+     */
+    select?: MissaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Missao
+     */
+    omit?: MissaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MissaoInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Missao.
+     */
+    data: XOR<MissaoUpdateInput, MissaoUncheckedUpdateInput>
+    /**
+     * Choose, which Missao to update.
+     */
+    where: MissaoWhereUniqueInput
+  }
+
+  /**
+   * Missao updateMany
+   */
+  export type MissaoUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Missaos.
+     */
+    data: XOR<MissaoUpdateManyMutationInput, MissaoUncheckedUpdateManyInput>
+    /**
+     * Filter which Missaos to update
+     */
+    where?: MissaoWhereInput
+    /**
+     * Limit how many Missaos to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Missao updateManyAndReturn
+   */
+  export type MissaoUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Missao
+     */
+    select?: MissaoSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Missao
+     */
+    omit?: MissaoOmit<ExtArgs> | null
+    /**
+     * The data used to update Missaos.
+     */
+    data: XOR<MissaoUpdateManyMutationInput, MissaoUncheckedUpdateManyInput>
+    /**
+     * Filter which Missaos to update
+     */
+    where?: MissaoWhereInput
+    /**
+     * Limit how many Missaos to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MissaoIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Missao upsert
+   */
+  export type MissaoUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Missao
+     */
+    select?: MissaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Missao
+     */
+    omit?: MissaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MissaoInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Missao to update in case it exists.
+     */
+    where: MissaoWhereUniqueInput
+    /**
+     * In case the Missao found by the `where` argument doesn't exist, create a new Missao with this data.
+     */
+    create: XOR<MissaoCreateInput, MissaoUncheckedCreateInput>
+    /**
+     * In case the Missao was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MissaoUpdateInput, MissaoUncheckedUpdateInput>
+  }
+
+  /**
+   * Missao delete
+   */
+  export type MissaoDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Missao
+     */
+    select?: MissaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Missao
+     */
+    omit?: MissaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MissaoInclude<ExtArgs> | null
+    /**
+     * Filter which Missao to delete.
+     */
+    where: MissaoWhereUniqueInput
+  }
+
+  /**
+   * Missao deleteMany
+   */
+  export type MissaoDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Missaos to delete
+     */
+    where?: MissaoWhereInput
+    /**
+     * Limit how many Missaos to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Missao.produtos
+   */
+  export type Missao$produtosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MissaoProduto
+     */
+    select?: MissaoProdutoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MissaoProduto
+     */
+    omit?: MissaoProdutoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MissaoProdutoInclude<ExtArgs> | null
+    where?: MissaoProdutoWhereInput
+    orderBy?: MissaoProdutoOrderByWithRelationInput | MissaoProdutoOrderByWithRelationInput[]
+    cursor?: MissaoProdutoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MissaoProdutoScalarFieldEnum | MissaoProdutoScalarFieldEnum[]
+  }
+
+  /**
+   * Missao without action
+   */
+  export type MissaoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Missao
+     */
+    select?: MissaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Missao
+     */
+    omit?: MissaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MissaoInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model MissaoProduto
+   */
+
+  export type AggregateMissaoProduto = {
+    _count: MissaoProdutoCountAggregateOutputType | null
+    _avg: MissaoProdutoAvgAggregateOutputType | null
+    _sum: MissaoProdutoSumAggregateOutputType | null
+    _min: MissaoProdutoMinAggregateOutputType | null
+    _max: MissaoProdutoMaxAggregateOutputType | null
+  }
+
+  export type MissaoProdutoAvgAggregateOutputType = {
+    id: number | null
+    missaoId: number | null
+    produtoId: number | null
+  }
+
+  export type MissaoProdutoSumAggregateOutputType = {
+    id: number | null
+    missaoId: number | null
+    produtoId: number | null
+  }
+
+  export type MissaoProdutoMinAggregateOutputType = {
+    id: number | null
+    missaoId: number | null
+    produtoId: number | null
+  }
+
+  export type MissaoProdutoMaxAggregateOutputType = {
+    id: number | null
+    missaoId: number | null
+    produtoId: number | null
+  }
+
+  export type MissaoProdutoCountAggregateOutputType = {
+    id: number
+    missaoId: number
+    produtoId: number
+    _all: number
+  }
+
+
+  export type MissaoProdutoAvgAggregateInputType = {
+    id?: true
+    missaoId?: true
+    produtoId?: true
+  }
+
+  export type MissaoProdutoSumAggregateInputType = {
+    id?: true
+    missaoId?: true
+    produtoId?: true
+  }
+
+  export type MissaoProdutoMinAggregateInputType = {
+    id?: true
+    missaoId?: true
+    produtoId?: true
+  }
+
+  export type MissaoProdutoMaxAggregateInputType = {
+    id?: true
+    missaoId?: true
+    produtoId?: true
+  }
+
+  export type MissaoProdutoCountAggregateInputType = {
+    id?: true
+    missaoId?: true
+    produtoId?: true
+    _all?: true
+  }
+
+  export type MissaoProdutoAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MissaoProduto to aggregate.
+     */
+    where?: MissaoProdutoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MissaoProdutos to fetch.
+     */
+    orderBy?: MissaoProdutoOrderByWithRelationInput | MissaoProdutoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MissaoProdutoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MissaoProdutos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MissaoProdutos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MissaoProdutos
+    **/
+    _count?: true | MissaoProdutoCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: MissaoProdutoAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: MissaoProdutoSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MissaoProdutoMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MissaoProdutoMaxAggregateInputType
+  }
+
+  export type GetMissaoProdutoAggregateType<T extends MissaoProdutoAggregateArgs> = {
+        [P in keyof T & keyof AggregateMissaoProduto]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMissaoProduto[P]>
+      : GetScalarType<T[P], AggregateMissaoProduto[P]>
+  }
+
+
+
+
+  export type MissaoProdutoGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MissaoProdutoWhereInput
+    orderBy?: MissaoProdutoOrderByWithAggregationInput | MissaoProdutoOrderByWithAggregationInput[]
+    by: MissaoProdutoScalarFieldEnum[] | MissaoProdutoScalarFieldEnum
+    having?: MissaoProdutoScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MissaoProdutoCountAggregateInputType | true
+    _avg?: MissaoProdutoAvgAggregateInputType
+    _sum?: MissaoProdutoSumAggregateInputType
+    _min?: MissaoProdutoMinAggregateInputType
+    _max?: MissaoProdutoMaxAggregateInputType
+  }
+
+  export type MissaoProdutoGroupByOutputType = {
+    id: number
+    missaoId: number
+    produtoId: number
+    _count: MissaoProdutoCountAggregateOutputType | null
+    _avg: MissaoProdutoAvgAggregateOutputType | null
+    _sum: MissaoProdutoSumAggregateOutputType | null
+    _min: MissaoProdutoMinAggregateOutputType | null
+    _max: MissaoProdutoMaxAggregateOutputType | null
+  }
+
+  type GetMissaoProdutoGroupByPayload<T extends MissaoProdutoGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MissaoProdutoGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MissaoProdutoGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MissaoProdutoGroupByOutputType[P]>
+            : GetScalarType<T[P], MissaoProdutoGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MissaoProdutoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    missaoId?: boolean
+    produtoId?: boolean
+    missao?: boolean | MissaoDefaultArgs<ExtArgs>
+    produto?: boolean | ProdutoDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["missaoProduto"]>
+
+  export type MissaoProdutoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    missaoId?: boolean
+    produtoId?: boolean
+    missao?: boolean | MissaoDefaultArgs<ExtArgs>
+    produto?: boolean | ProdutoDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["missaoProduto"]>
+
+  export type MissaoProdutoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    missaoId?: boolean
+    produtoId?: boolean
+    missao?: boolean | MissaoDefaultArgs<ExtArgs>
+    produto?: boolean | ProdutoDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["missaoProduto"]>
+
+  export type MissaoProdutoSelectScalar = {
+    id?: boolean
+    missaoId?: boolean
+    produtoId?: boolean
+  }
+
+  export type MissaoProdutoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "missaoId" | "produtoId", ExtArgs["result"]["missaoProduto"]>
+  export type MissaoProdutoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    missao?: boolean | MissaoDefaultArgs<ExtArgs>
+    produto?: boolean | ProdutoDefaultArgs<ExtArgs>
+  }
+  export type MissaoProdutoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    missao?: boolean | MissaoDefaultArgs<ExtArgs>
+    produto?: boolean | ProdutoDefaultArgs<ExtArgs>
+  }
+  export type MissaoProdutoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    missao?: boolean | MissaoDefaultArgs<ExtArgs>
+    produto?: boolean | ProdutoDefaultArgs<ExtArgs>
+  }
+
+  export type $MissaoProdutoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MissaoProduto"
+    objects: {
+      missao: Prisma.$MissaoPayload<ExtArgs>
+      produto: Prisma.$ProdutoPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      missaoId: number
+      produtoId: number
+    }, ExtArgs["result"]["missaoProduto"]>
+    composites: {}
+  }
+
+  type MissaoProdutoGetPayload<S extends boolean | null | undefined | MissaoProdutoDefaultArgs> = $Result.GetResult<Prisma.$MissaoProdutoPayload, S>
+
+  type MissaoProdutoCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MissaoProdutoFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MissaoProdutoCountAggregateInputType | true
+    }
+
+  export interface MissaoProdutoDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MissaoProduto'], meta: { name: 'MissaoProduto' } }
+    /**
+     * Find zero or one MissaoProduto that matches the filter.
+     * @param {MissaoProdutoFindUniqueArgs} args - Arguments to find a MissaoProduto
+     * @example
+     * // Get one MissaoProduto
+     * const missaoProduto = await prisma.missaoProduto.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MissaoProdutoFindUniqueArgs>(args: SelectSubset<T, MissaoProdutoFindUniqueArgs<ExtArgs>>): Prisma__MissaoProdutoClient<$Result.GetResult<Prisma.$MissaoProdutoPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one MissaoProduto that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MissaoProdutoFindUniqueOrThrowArgs} args - Arguments to find a MissaoProduto
+     * @example
+     * // Get one MissaoProduto
+     * const missaoProduto = await prisma.missaoProduto.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MissaoProdutoFindUniqueOrThrowArgs>(args: SelectSubset<T, MissaoProdutoFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MissaoProdutoClient<$Result.GetResult<Prisma.$MissaoProdutoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MissaoProduto that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MissaoProdutoFindFirstArgs} args - Arguments to find a MissaoProduto
+     * @example
+     * // Get one MissaoProduto
+     * const missaoProduto = await prisma.missaoProduto.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MissaoProdutoFindFirstArgs>(args?: SelectSubset<T, MissaoProdutoFindFirstArgs<ExtArgs>>): Prisma__MissaoProdutoClient<$Result.GetResult<Prisma.$MissaoProdutoPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MissaoProduto that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MissaoProdutoFindFirstOrThrowArgs} args - Arguments to find a MissaoProduto
+     * @example
+     * // Get one MissaoProduto
+     * const missaoProduto = await prisma.missaoProduto.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MissaoProdutoFindFirstOrThrowArgs>(args?: SelectSubset<T, MissaoProdutoFindFirstOrThrowArgs<ExtArgs>>): Prisma__MissaoProdutoClient<$Result.GetResult<Prisma.$MissaoProdutoPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more MissaoProdutos that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MissaoProdutoFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MissaoProdutos
+     * const missaoProdutos = await prisma.missaoProduto.findMany()
+     * 
+     * // Get first 10 MissaoProdutos
+     * const missaoProdutos = await prisma.missaoProduto.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const missaoProdutoWithIdOnly = await prisma.missaoProduto.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MissaoProdutoFindManyArgs>(args?: SelectSubset<T, MissaoProdutoFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MissaoProdutoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a MissaoProduto.
+     * @param {MissaoProdutoCreateArgs} args - Arguments to create a MissaoProduto.
+     * @example
+     * // Create one MissaoProduto
+     * const MissaoProduto = await prisma.missaoProduto.create({
+     *   data: {
+     *     // ... data to create a MissaoProduto
+     *   }
+     * })
+     * 
+     */
+    create<T extends MissaoProdutoCreateArgs>(args: SelectSubset<T, MissaoProdutoCreateArgs<ExtArgs>>): Prisma__MissaoProdutoClient<$Result.GetResult<Prisma.$MissaoProdutoPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many MissaoProdutos.
+     * @param {MissaoProdutoCreateManyArgs} args - Arguments to create many MissaoProdutos.
+     * @example
+     * // Create many MissaoProdutos
+     * const missaoProduto = await prisma.missaoProduto.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MissaoProdutoCreateManyArgs>(args?: SelectSubset<T, MissaoProdutoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many MissaoProdutos and returns the data saved in the database.
+     * @param {MissaoProdutoCreateManyAndReturnArgs} args - Arguments to create many MissaoProdutos.
+     * @example
+     * // Create many MissaoProdutos
+     * const missaoProduto = await prisma.missaoProduto.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many MissaoProdutos and only return the `id`
+     * const missaoProdutoWithIdOnly = await prisma.missaoProduto.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MissaoProdutoCreateManyAndReturnArgs>(args?: SelectSubset<T, MissaoProdutoCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MissaoProdutoPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a MissaoProduto.
+     * @param {MissaoProdutoDeleteArgs} args - Arguments to delete one MissaoProduto.
+     * @example
+     * // Delete one MissaoProduto
+     * const MissaoProduto = await prisma.missaoProduto.delete({
+     *   where: {
+     *     // ... filter to delete one MissaoProduto
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MissaoProdutoDeleteArgs>(args: SelectSubset<T, MissaoProdutoDeleteArgs<ExtArgs>>): Prisma__MissaoProdutoClient<$Result.GetResult<Prisma.$MissaoProdutoPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one MissaoProduto.
+     * @param {MissaoProdutoUpdateArgs} args - Arguments to update one MissaoProduto.
+     * @example
+     * // Update one MissaoProduto
+     * const missaoProduto = await prisma.missaoProduto.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MissaoProdutoUpdateArgs>(args: SelectSubset<T, MissaoProdutoUpdateArgs<ExtArgs>>): Prisma__MissaoProdutoClient<$Result.GetResult<Prisma.$MissaoProdutoPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more MissaoProdutos.
+     * @param {MissaoProdutoDeleteManyArgs} args - Arguments to filter MissaoProdutos to delete.
+     * @example
+     * // Delete a few MissaoProdutos
+     * const { count } = await prisma.missaoProduto.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MissaoProdutoDeleteManyArgs>(args?: SelectSubset<T, MissaoProdutoDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MissaoProdutos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MissaoProdutoUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MissaoProdutos
+     * const missaoProduto = await prisma.missaoProduto.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MissaoProdutoUpdateManyArgs>(args: SelectSubset<T, MissaoProdutoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MissaoProdutos and returns the data updated in the database.
+     * @param {MissaoProdutoUpdateManyAndReturnArgs} args - Arguments to update many MissaoProdutos.
+     * @example
+     * // Update many MissaoProdutos
+     * const missaoProduto = await prisma.missaoProduto.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more MissaoProdutos and only return the `id`
+     * const missaoProdutoWithIdOnly = await prisma.missaoProduto.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MissaoProdutoUpdateManyAndReturnArgs>(args: SelectSubset<T, MissaoProdutoUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MissaoProdutoPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one MissaoProduto.
+     * @param {MissaoProdutoUpsertArgs} args - Arguments to update or create a MissaoProduto.
+     * @example
+     * // Update or create a MissaoProduto
+     * const missaoProduto = await prisma.missaoProduto.upsert({
+     *   create: {
+     *     // ... data to create a MissaoProduto
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MissaoProduto we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MissaoProdutoUpsertArgs>(args: SelectSubset<T, MissaoProdutoUpsertArgs<ExtArgs>>): Prisma__MissaoProdutoClient<$Result.GetResult<Prisma.$MissaoProdutoPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of MissaoProdutos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MissaoProdutoCountArgs} args - Arguments to filter MissaoProdutos to count.
+     * @example
+     * // Count the number of MissaoProdutos
+     * const count = await prisma.missaoProduto.count({
+     *   where: {
+     *     // ... the filter for the MissaoProdutos we want to count
+     *   }
+     * })
+    **/
+    count<T extends MissaoProdutoCountArgs>(
+      args?: Subset<T, MissaoProdutoCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MissaoProdutoCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MissaoProduto.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MissaoProdutoAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MissaoProdutoAggregateArgs>(args: Subset<T, MissaoProdutoAggregateArgs>): Prisma.PrismaPromise<GetMissaoProdutoAggregateType<T>>
+
+    /**
+     * Group by MissaoProduto.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MissaoProdutoGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MissaoProdutoGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MissaoProdutoGroupByArgs['orderBy'] }
+        : { orderBy?: MissaoProdutoGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MissaoProdutoGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMissaoProdutoGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MissaoProduto model
+   */
+  readonly fields: MissaoProdutoFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MissaoProduto.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MissaoProdutoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    missao<T extends MissaoDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MissaoDefaultArgs<ExtArgs>>): Prisma__MissaoClient<$Result.GetResult<Prisma.$MissaoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    produto<T extends ProdutoDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProdutoDefaultArgs<ExtArgs>>): Prisma__ProdutoClient<$Result.GetResult<Prisma.$ProdutoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the MissaoProduto model
+   */
+  interface MissaoProdutoFieldRefs {
+    readonly id: FieldRef<"MissaoProduto", 'Int'>
+    readonly missaoId: FieldRef<"MissaoProduto", 'Int'>
+    readonly produtoId: FieldRef<"MissaoProduto", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * MissaoProduto findUnique
+   */
+  export type MissaoProdutoFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MissaoProduto
+     */
+    select?: MissaoProdutoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MissaoProduto
+     */
+    omit?: MissaoProdutoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MissaoProdutoInclude<ExtArgs> | null
+    /**
+     * Filter, which MissaoProduto to fetch.
+     */
+    where: MissaoProdutoWhereUniqueInput
+  }
+
+  /**
+   * MissaoProduto findUniqueOrThrow
+   */
+  export type MissaoProdutoFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MissaoProduto
+     */
+    select?: MissaoProdutoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MissaoProduto
+     */
+    omit?: MissaoProdutoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MissaoProdutoInclude<ExtArgs> | null
+    /**
+     * Filter, which MissaoProduto to fetch.
+     */
+    where: MissaoProdutoWhereUniqueInput
+  }
+
+  /**
+   * MissaoProduto findFirst
+   */
+  export type MissaoProdutoFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MissaoProduto
+     */
+    select?: MissaoProdutoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MissaoProduto
+     */
+    omit?: MissaoProdutoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MissaoProdutoInclude<ExtArgs> | null
+    /**
+     * Filter, which MissaoProduto to fetch.
+     */
+    where?: MissaoProdutoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MissaoProdutos to fetch.
+     */
+    orderBy?: MissaoProdutoOrderByWithRelationInput | MissaoProdutoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MissaoProdutos.
+     */
+    cursor?: MissaoProdutoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MissaoProdutos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MissaoProdutos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MissaoProdutos.
+     */
+    distinct?: MissaoProdutoScalarFieldEnum | MissaoProdutoScalarFieldEnum[]
+  }
+
+  /**
+   * MissaoProduto findFirstOrThrow
+   */
+  export type MissaoProdutoFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MissaoProduto
+     */
+    select?: MissaoProdutoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MissaoProduto
+     */
+    omit?: MissaoProdutoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MissaoProdutoInclude<ExtArgs> | null
+    /**
+     * Filter, which MissaoProduto to fetch.
+     */
+    where?: MissaoProdutoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MissaoProdutos to fetch.
+     */
+    orderBy?: MissaoProdutoOrderByWithRelationInput | MissaoProdutoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MissaoProdutos.
+     */
+    cursor?: MissaoProdutoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MissaoProdutos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MissaoProdutos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MissaoProdutos.
+     */
+    distinct?: MissaoProdutoScalarFieldEnum | MissaoProdutoScalarFieldEnum[]
+  }
+
+  /**
+   * MissaoProduto findMany
+   */
+  export type MissaoProdutoFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MissaoProduto
+     */
+    select?: MissaoProdutoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MissaoProduto
+     */
+    omit?: MissaoProdutoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MissaoProdutoInclude<ExtArgs> | null
+    /**
+     * Filter, which MissaoProdutos to fetch.
+     */
+    where?: MissaoProdutoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MissaoProdutos to fetch.
+     */
+    orderBy?: MissaoProdutoOrderByWithRelationInput | MissaoProdutoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MissaoProdutos.
+     */
+    cursor?: MissaoProdutoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MissaoProdutos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MissaoProdutos.
+     */
+    skip?: number
+    distinct?: MissaoProdutoScalarFieldEnum | MissaoProdutoScalarFieldEnum[]
+  }
+
+  /**
+   * MissaoProduto create
+   */
+  export type MissaoProdutoCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MissaoProduto
+     */
+    select?: MissaoProdutoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MissaoProduto
+     */
+    omit?: MissaoProdutoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MissaoProdutoInclude<ExtArgs> | null
+    /**
+     * The data needed to create a MissaoProduto.
+     */
+    data: XOR<MissaoProdutoCreateInput, MissaoProdutoUncheckedCreateInput>
+  }
+
+  /**
+   * MissaoProduto createMany
+   */
+  export type MissaoProdutoCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many MissaoProdutos.
+     */
+    data: MissaoProdutoCreateManyInput | MissaoProdutoCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MissaoProduto createManyAndReturn
+   */
+  export type MissaoProdutoCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MissaoProduto
+     */
+    select?: MissaoProdutoSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MissaoProduto
+     */
+    omit?: MissaoProdutoOmit<ExtArgs> | null
+    /**
+     * The data used to create many MissaoProdutos.
+     */
+    data: MissaoProdutoCreateManyInput | MissaoProdutoCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MissaoProdutoIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MissaoProduto update
+   */
+  export type MissaoProdutoUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MissaoProduto
+     */
+    select?: MissaoProdutoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MissaoProduto
+     */
+    omit?: MissaoProdutoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MissaoProdutoInclude<ExtArgs> | null
+    /**
+     * The data needed to update a MissaoProduto.
+     */
+    data: XOR<MissaoProdutoUpdateInput, MissaoProdutoUncheckedUpdateInput>
+    /**
+     * Choose, which MissaoProduto to update.
+     */
+    where: MissaoProdutoWhereUniqueInput
+  }
+
+  /**
+   * MissaoProduto updateMany
+   */
+  export type MissaoProdutoUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update MissaoProdutos.
+     */
+    data: XOR<MissaoProdutoUpdateManyMutationInput, MissaoProdutoUncheckedUpdateManyInput>
+    /**
+     * Filter which MissaoProdutos to update
+     */
+    where?: MissaoProdutoWhereInput
+    /**
+     * Limit how many MissaoProdutos to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * MissaoProduto updateManyAndReturn
+   */
+  export type MissaoProdutoUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MissaoProduto
+     */
+    select?: MissaoProdutoSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MissaoProduto
+     */
+    omit?: MissaoProdutoOmit<ExtArgs> | null
+    /**
+     * The data used to update MissaoProdutos.
+     */
+    data: XOR<MissaoProdutoUpdateManyMutationInput, MissaoProdutoUncheckedUpdateManyInput>
+    /**
+     * Filter which MissaoProdutos to update
+     */
+    where?: MissaoProdutoWhereInput
+    /**
+     * Limit how many MissaoProdutos to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MissaoProdutoIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MissaoProduto upsert
+   */
+  export type MissaoProdutoUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MissaoProduto
+     */
+    select?: MissaoProdutoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MissaoProduto
+     */
+    omit?: MissaoProdutoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MissaoProdutoInclude<ExtArgs> | null
+    /**
+     * The filter to search for the MissaoProduto to update in case it exists.
+     */
+    where: MissaoProdutoWhereUniqueInput
+    /**
+     * In case the MissaoProduto found by the `where` argument doesn't exist, create a new MissaoProduto with this data.
+     */
+    create: XOR<MissaoProdutoCreateInput, MissaoProdutoUncheckedCreateInput>
+    /**
+     * In case the MissaoProduto was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MissaoProdutoUpdateInput, MissaoProdutoUncheckedUpdateInput>
+  }
+
+  /**
+   * MissaoProduto delete
+   */
+  export type MissaoProdutoDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MissaoProduto
+     */
+    select?: MissaoProdutoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MissaoProduto
+     */
+    omit?: MissaoProdutoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MissaoProdutoInclude<ExtArgs> | null
+    /**
+     * Filter which MissaoProduto to delete.
+     */
+    where: MissaoProdutoWhereUniqueInput
+  }
+
+  /**
+   * MissaoProduto deleteMany
+   */
+  export type MissaoProdutoDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MissaoProdutos to delete
+     */
+    where?: MissaoProdutoWhereInput
+    /**
+     * Limit how many MissaoProdutos to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * MissaoProduto without action
+   */
+  export type MissaoProdutoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MissaoProduto
+     */
+    select?: MissaoProdutoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MissaoProduto
+     */
+    omit?: MissaoProdutoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MissaoProdutoInclude<ExtArgs> | null
   }
 
 
@@ -4179,6 +6811,26 @@ export namespace Prisma {
   };
 
   export type ProdutoScalarFieldEnum = (typeof ProdutoScalarFieldEnum)[keyof typeof ProdutoScalarFieldEnum]
+
+
+  export const MissaoScalarFieldEnum: {
+    id: 'id',
+    titulo: 'titulo',
+    status: 'status',
+    criadaEm: 'criadaEm',
+    concorrenteId: 'concorrenteId'
+  };
+
+  export type MissaoScalarFieldEnum = (typeof MissaoScalarFieldEnum)[keyof typeof MissaoScalarFieldEnum]
+
+
+  export const MissaoProdutoScalarFieldEnum: {
+    id: 'id',
+    missaoId: 'missaoId',
+    produtoId: 'produtoId'
+  };
+
+  export type MissaoProdutoScalarFieldEnum = (typeof MissaoProdutoScalarFieldEnum)[keyof typeof MissaoProdutoScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -4250,6 +6902,20 @@ export namespace Prisma {
    */
   export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
+
+
+  /**
+   * Reference to a field of type 'DateTime'
+   */
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime[]'
+   */
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
   /**
    * Deep Input Types
    */
@@ -4318,6 +6984,7 @@ export namespace Prisma {
     tipo?: StringFilter<"Concorrente"> | string
     endereco?: StringFilter<"Concorrente"> | string
     foto?: StringNullableFilter<"Concorrente"> | string | null
+    missoes?: MissaoListRelationFilter
   }
 
   export type ConcorrenteOrderByWithRelationInput = {
@@ -4326,6 +6993,7 @@ export namespace Prisma {
     tipo?: SortOrder
     endereco?: SortOrder
     foto?: SortOrderInput | SortOrder
+    missoes?: MissaoOrderByRelationAggregateInput
   }
 
   export type ConcorrenteWhereUniqueInput = Prisma.AtLeast<{
@@ -4337,6 +7005,7 @@ export namespace Prisma {
     tipo?: StringFilter<"Concorrente"> | string
     endereco?: StringFilter<"Concorrente"> | string
     foto?: StringNullableFilter<"Concorrente"> | string | null
+    missoes?: MissaoListRelationFilter
   }, "id">
 
   export type ConcorrenteOrderByWithAggregationInput = {
@@ -4372,6 +7041,7 @@ export namespace Prisma {
     codigo?: StringNullableFilter<"Produto"> | string | null
     preco?: FloatFilter<"Produto"> | number
     foto?: StringNullableFilter<"Produto"> | string | null
+    missoes?: MissaoProdutoListRelationFilter
   }
 
   export type ProdutoOrderByWithRelationInput = {
@@ -4380,6 +7050,7 @@ export namespace Prisma {
     codigo?: SortOrderInput | SortOrder
     preco?: SortOrder
     foto?: SortOrderInput | SortOrder
+    missoes?: MissaoProdutoOrderByRelationAggregateInput
   }
 
   export type ProdutoWhereUniqueInput = Prisma.AtLeast<{
@@ -4391,6 +7062,7 @@ export namespace Prisma {
     codigo?: StringNullableFilter<"Produto"> | string | null
     preco?: FloatFilter<"Produto"> | number
     foto?: StringNullableFilter<"Produto"> | string | null
+    missoes?: MissaoProdutoListRelationFilter
   }, "id">
 
   export type ProdutoOrderByWithAggregationInput = {
@@ -4415,6 +7087,117 @@ export namespace Prisma {
     codigo?: StringNullableWithAggregatesFilter<"Produto"> | string | null
     preco?: FloatWithAggregatesFilter<"Produto"> | number
     foto?: StringNullableWithAggregatesFilter<"Produto"> | string | null
+  }
+
+  export type MissaoWhereInput = {
+    AND?: MissaoWhereInput | MissaoWhereInput[]
+    OR?: MissaoWhereInput[]
+    NOT?: MissaoWhereInput | MissaoWhereInput[]
+    id?: IntFilter<"Missao"> | number
+    titulo?: StringFilter<"Missao"> | string
+    status?: StringFilter<"Missao"> | string
+    criadaEm?: DateTimeFilter<"Missao"> | Date | string
+    concorrenteId?: IntFilter<"Missao"> | number
+    concorrente?: XOR<ConcorrenteScalarRelationFilter, ConcorrenteWhereInput>
+    produtos?: MissaoProdutoListRelationFilter
+  }
+
+  export type MissaoOrderByWithRelationInput = {
+    id?: SortOrder
+    titulo?: SortOrder
+    status?: SortOrder
+    criadaEm?: SortOrder
+    concorrenteId?: SortOrder
+    concorrente?: ConcorrenteOrderByWithRelationInput
+    produtos?: MissaoProdutoOrderByRelationAggregateInput
+  }
+
+  export type MissaoWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: MissaoWhereInput | MissaoWhereInput[]
+    OR?: MissaoWhereInput[]
+    NOT?: MissaoWhereInput | MissaoWhereInput[]
+    titulo?: StringFilter<"Missao"> | string
+    status?: StringFilter<"Missao"> | string
+    criadaEm?: DateTimeFilter<"Missao"> | Date | string
+    concorrenteId?: IntFilter<"Missao"> | number
+    concorrente?: XOR<ConcorrenteScalarRelationFilter, ConcorrenteWhereInput>
+    produtos?: MissaoProdutoListRelationFilter
+  }, "id">
+
+  export type MissaoOrderByWithAggregationInput = {
+    id?: SortOrder
+    titulo?: SortOrder
+    status?: SortOrder
+    criadaEm?: SortOrder
+    concorrenteId?: SortOrder
+    _count?: MissaoCountOrderByAggregateInput
+    _avg?: MissaoAvgOrderByAggregateInput
+    _max?: MissaoMaxOrderByAggregateInput
+    _min?: MissaoMinOrderByAggregateInput
+    _sum?: MissaoSumOrderByAggregateInput
+  }
+
+  export type MissaoScalarWhereWithAggregatesInput = {
+    AND?: MissaoScalarWhereWithAggregatesInput | MissaoScalarWhereWithAggregatesInput[]
+    OR?: MissaoScalarWhereWithAggregatesInput[]
+    NOT?: MissaoScalarWhereWithAggregatesInput | MissaoScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Missao"> | number
+    titulo?: StringWithAggregatesFilter<"Missao"> | string
+    status?: StringWithAggregatesFilter<"Missao"> | string
+    criadaEm?: DateTimeWithAggregatesFilter<"Missao"> | Date | string
+    concorrenteId?: IntWithAggregatesFilter<"Missao"> | number
+  }
+
+  export type MissaoProdutoWhereInput = {
+    AND?: MissaoProdutoWhereInput | MissaoProdutoWhereInput[]
+    OR?: MissaoProdutoWhereInput[]
+    NOT?: MissaoProdutoWhereInput | MissaoProdutoWhereInput[]
+    id?: IntFilter<"MissaoProduto"> | number
+    missaoId?: IntFilter<"MissaoProduto"> | number
+    produtoId?: IntFilter<"MissaoProduto"> | number
+    missao?: XOR<MissaoScalarRelationFilter, MissaoWhereInput>
+    produto?: XOR<ProdutoScalarRelationFilter, ProdutoWhereInput>
+  }
+
+  export type MissaoProdutoOrderByWithRelationInput = {
+    id?: SortOrder
+    missaoId?: SortOrder
+    produtoId?: SortOrder
+    missao?: MissaoOrderByWithRelationInput
+    produto?: ProdutoOrderByWithRelationInput
+  }
+
+  export type MissaoProdutoWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    missaoId_produtoId?: MissaoProdutoMissaoIdProdutoIdCompoundUniqueInput
+    AND?: MissaoProdutoWhereInput | MissaoProdutoWhereInput[]
+    OR?: MissaoProdutoWhereInput[]
+    NOT?: MissaoProdutoWhereInput | MissaoProdutoWhereInput[]
+    missaoId?: IntFilter<"MissaoProduto"> | number
+    produtoId?: IntFilter<"MissaoProduto"> | number
+    missao?: XOR<MissaoScalarRelationFilter, MissaoWhereInput>
+    produto?: XOR<ProdutoScalarRelationFilter, ProdutoWhereInput>
+  }, "id" | "missaoId_produtoId">
+
+  export type MissaoProdutoOrderByWithAggregationInput = {
+    id?: SortOrder
+    missaoId?: SortOrder
+    produtoId?: SortOrder
+    _count?: MissaoProdutoCountOrderByAggregateInput
+    _avg?: MissaoProdutoAvgOrderByAggregateInput
+    _max?: MissaoProdutoMaxOrderByAggregateInput
+    _min?: MissaoProdutoMinOrderByAggregateInput
+    _sum?: MissaoProdutoSumOrderByAggregateInput
+  }
+
+  export type MissaoProdutoScalarWhereWithAggregatesInput = {
+    AND?: MissaoProdutoScalarWhereWithAggregatesInput | MissaoProdutoScalarWhereWithAggregatesInput[]
+    OR?: MissaoProdutoScalarWhereWithAggregatesInput[]
+    NOT?: MissaoProdutoScalarWhereWithAggregatesInput | MissaoProdutoScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"MissaoProduto"> | number
+    missaoId?: IntWithAggregatesFilter<"MissaoProduto"> | number
+    produtoId?: IntWithAggregatesFilter<"MissaoProduto"> | number
   }
 
   export type UsuarioCreateInput = {
@@ -4475,6 +7258,7 @@ export namespace Prisma {
     tipo: string
     endereco: string
     foto?: string | null
+    missoes?: MissaoCreateNestedManyWithoutConcorrenteInput
   }
 
   export type ConcorrenteUncheckedCreateInput = {
@@ -4483,6 +7267,7 @@ export namespace Prisma {
     tipo: string
     endereco: string
     foto?: string | null
+    missoes?: MissaoUncheckedCreateNestedManyWithoutConcorrenteInput
   }
 
   export type ConcorrenteUpdateInput = {
@@ -4490,6 +7275,7 @@ export namespace Prisma {
     tipo?: StringFieldUpdateOperationsInput | string
     endereco?: StringFieldUpdateOperationsInput | string
     foto?: NullableStringFieldUpdateOperationsInput | string | null
+    missoes?: MissaoUpdateManyWithoutConcorrenteNestedInput
   }
 
   export type ConcorrenteUncheckedUpdateInput = {
@@ -4498,6 +7284,7 @@ export namespace Prisma {
     tipo?: StringFieldUpdateOperationsInput | string
     endereco?: StringFieldUpdateOperationsInput | string
     foto?: NullableStringFieldUpdateOperationsInput | string | null
+    missoes?: MissaoUncheckedUpdateManyWithoutConcorrenteNestedInput
   }
 
   export type ConcorrenteCreateManyInput = {
@@ -4528,6 +7315,7 @@ export namespace Prisma {
     codigo?: string | null
     preco: number
     foto?: string | null
+    missoes?: MissaoProdutoCreateNestedManyWithoutProdutoInput
   }
 
   export type ProdutoUncheckedCreateInput = {
@@ -4536,6 +7324,7 @@ export namespace Prisma {
     codigo?: string | null
     preco: number
     foto?: string | null
+    missoes?: MissaoProdutoUncheckedCreateNestedManyWithoutProdutoInput
   }
 
   export type ProdutoUpdateInput = {
@@ -4543,6 +7332,7 @@ export namespace Prisma {
     codigo?: NullableStringFieldUpdateOperationsInput | string | null
     preco?: FloatFieldUpdateOperationsInput | number
     foto?: NullableStringFieldUpdateOperationsInput | string | null
+    missoes?: MissaoProdutoUpdateManyWithoutProdutoNestedInput
   }
 
   export type ProdutoUncheckedUpdateInput = {
@@ -4551,6 +7341,7 @@ export namespace Prisma {
     codigo?: NullableStringFieldUpdateOperationsInput | string | null
     preco?: FloatFieldUpdateOperationsInput | number
     foto?: NullableStringFieldUpdateOperationsInput | string | null
+    missoes?: MissaoProdutoUncheckedUpdateManyWithoutProdutoNestedInput
   }
 
   export type ProdutoCreateManyInput = {
@@ -4574,6 +7365,100 @@ export namespace Prisma {
     codigo?: NullableStringFieldUpdateOperationsInput | string | null
     preco?: FloatFieldUpdateOperationsInput | number
     foto?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type MissaoCreateInput = {
+    titulo: string
+    status?: string
+    criadaEm?: Date | string
+    concorrente: ConcorrenteCreateNestedOneWithoutMissoesInput
+    produtos?: MissaoProdutoCreateNestedManyWithoutMissaoInput
+  }
+
+  export type MissaoUncheckedCreateInput = {
+    id?: number
+    titulo: string
+    status?: string
+    criadaEm?: Date | string
+    concorrenteId: number
+    produtos?: MissaoProdutoUncheckedCreateNestedManyWithoutMissaoInput
+  }
+
+  export type MissaoUpdateInput = {
+    titulo?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    criadaEm?: DateTimeFieldUpdateOperationsInput | Date | string
+    concorrente?: ConcorrenteUpdateOneRequiredWithoutMissoesNestedInput
+    produtos?: MissaoProdutoUpdateManyWithoutMissaoNestedInput
+  }
+
+  export type MissaoUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    titulo?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    criadaEm?: DateTimeFieldUpdateOperationsInput | Date | string
+    concorrenteId?: IntFieldUpdateOperationsInput | number
+    produtos?: MissaoProdutoUncheckedUpdateManyWithoutMissaoNestedInput
+  }
+
+  export type MissaoCreateManyInput = {
+    id?: number
+    titulo: string
+    status?: string
+    criadaEm?: Date | string
+    concorrenteId: number
+  }
+
+  export type MissaoUpdateManyMutationInput = {
+    titulo?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    criadaEm?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MissaoUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    titulo?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    criadaEm?: DateTimeFieldUpdateOperationsInput | Date | string
+    concorrenteId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type MissaoProdutoCreateInput = {
+    missao: MissaoCreateNestedOneWithoutProdutosInput
+    produto: ProdutoCreateNestedOneWithoutMissoesInput
+  }
+
+  export type MissaoProdutoUncheckedCreateInput = {
+    id?: number
+    missaoId: number
+    produtoId: number
+  }
+
+  export type MissaoProdutoUpdateInput = {
+    missao?: MissaoUpdateOneRequiredWithoutProdutosNestedInput
+    produto?: ProdutoUpdateOneRequiredWithoutMissoesNestedInput
+  }
+
+  export type MissaoProdutoUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    missaoId?: IntFieldUpdateOperationsInput | number
+    produtoId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type MissaoProdutoCreateManyInput = {
+    id?: number
+    missaoId: number
+    produtoId: number
+  }
+
+  export type MissaoProdutoUpdateManyMutationInput = {
+
+  }
+
+  export type MissaoProdutoUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    missaoId?: IntFieldUpdateOperationsInput | number
+    produtoId?: IntFieldUpdateOperationsInput | number
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -4706,6 +7591,16 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
+  export type MissaoListRelationFilter = {
+    every?: MissaoWhereInput
+    some?: MissaoWhereInput
+    none?: MissaoWhereInput
+  }
+
+  export type MissaoOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type ConcorrenteCountOrderByAggregateInput = {
     id?: SortOrder
     nome?: SortOrder
@@ -4747,6 +7642,16 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type MissaoProdutoListRelationFilter = {
+    every?: MissaoProdutoWhereInput
+    some?: MissaoProdutoWhereInput
+    none?: MissaoProdutoWhereInput
+  }
+
+  export type MissaoProdutoOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type ProdutoCountOrderByAggregateInput = {
@@ -4799,6 +7704,115 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type ConcorrenteScalarRelationFilter = {
+    is?: ConcorrenteWhereInput
+    isNot?: ConcorrenteWhereInput
+  }
+
+  export type MissaoCountOrderByAggregateInput = {
+    id?: SortOrder
+    titulo?: SortOrder
+    status?: SortOrder
+    criadaEm?: SortOrder
+    concorrenteId?: SortOrder
+  }
+
+  export type MissaoAvgOrderByAggregateInput = {
+    id?: SortOrder
+    concorrenteId?: SortOrder
+  }
+
+  export type MissaoMaxOrderByAggregateInput = {
+    id?: SortOrder
+    titulo?: SortOrder
+    status?: SortOrder
+    criadaEm?: SortOrder
+    concorrenteId?: SortOrder
+  }
+
+  export type MissaoMinOrderByAggregateInput = {
+    id?: SortOrder
+    titulo?: SortOrder
+    status?: SortOrder
+    criadaEm?: SortOrder
+    concorrenteId?: SortOrder
+  }
+
+  export type MissaoSumOrderByAggregateInput = {
+    id?: SortOrder
+    concorrenteId?: SortOrder
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type MissaoScalarRelationFilter = {
+    is?: MissaoWhereInput
+    isNot?: MissaoWhereInput
+  }
+
+  export type ProdutoScalarRelationFilter = {
+    is?: ProdutoWhereInput
+    isNot?: ProdutoWhereInput
+  }
+
+  export type MissaoProdutoMissaoIdProdutoIdCompoundUniqueInput = {
+    missaoId: number
+    produtoId: number
+  }
+
+  export type MissaoProdutoCountOrderByAggregateInput = {
+    id?: SortOrder
+    missaoId?: SortOrder
+    produtoId?: SortOrder
+  }
+
+  export type MissaoProdutoAvgOrderByAggregateInput = {
+    id?: SortOrder
+    missaoId?: SortOrder
+    produtoId?: SortOrder
+  }
+
+  export type MissaoProdutoMaxOrderByAggregateInput = {
+    id?: SortOrder
+    missaoId?: SortOrder
+    produtoId?: SortOrder
+  }
+
+  export type MissaoProdutoMinOrderByAggregateInput = {
+    id?: SortOrder
+    missaoId?: SortOrder
+    produtoId?: SortOrder
+  }
+
+  export type MissaoProdutoSumOrderByAggregateInput = {
+    id?: SortOrder
+    missaoId?: SortOrder
+    produtoId?: SortOrder
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -4815,12 +7829,184 @@ export namespace Prisma {
     divide?: number
   }
 
+  export type MissaoCreateNestedManyWithoutConcorrenteInput = {
+    create?: XOR<MissaoCreateWithoutConcorrenteInput, MissaoUncheckedCreateWithoutConcorrenteInput> | MissaoCreateWithoutConcorrenteInput[] | MissaoUncheckedCreateWithoutConcorrenteInput[]
+    connectOrCreate?: MissaoCreateOrConnectWithoutConcorrenteInput | MissaoCreateOrConnectWithoutConcorrenteInput[]
+    createMany?: MissaoCreateManyConcorrenteInputEnvelope
+    connect?: MissaoWhereUniqueInput | MissaoWhereUniqueInput[]
+  }
+
+  export type MissaoUncheckedCreateNestedManyWithoutConcorrenteInput = {
+    create?: XOR<MissaoCreateWithoutConcorrenteInput, MissaoUncheckedCreateWithoutConcorrenteInput> | MissaoCreateWithoutConcorrenteInput[] | MissaoUncheckedCreateWithoutConcorrenteInput[]
+    connectOrCreate?: MissaoCreateOrConnectWithoutConcorrenteInput | MissaoCreateOrConnectWithoutConcorrenteInput[]
+    createMany?: MissaoCreateManyConcorrenteInputEnvelope
+    connect?: MissaoWhereUniqueInput | MissaoWhereUniqueInput[]
+  }
+
+  export type MissaoUpdateManyWithoutConcorrenteNestedInput = {
+    create?: XOR<MissaoCreateWithoutConcorrenteInput, MissaoUncheckedCreateWithoutConcorrenteInput> | MissaoCreateWithoutConcorrenteInput[] | MissaoUncheckedCreateWithoutConcorrenteInput[]
+    connectOrCreate?: MissaoCreateOrConnectWithoutConcorrenteInput | MissaoCreateOrConnectWithoutConcorrenteInput[]
+    upsert?: MissaoUpsertWithWhereUniqueWithoutConcorrenteInput | MissaoUpsertWithWhereUniqueWithoutConcorrenteInput[]
+    createMany?: MissaoCreateManyConcorrenteInputEnvelope
+    set?: MissaoWhereUniqueInput | MissaoWhereUniqueInput[]
+    disconnect?: MissaoWhereUniqueInput | MissaoWhereUniqueInput[]
+    delete?: MissaoWhereUniqueInput | MissaoWhereUniqueInput[]
+    connect?: MissaoWhereUniqueInput | MissaoWhereUniqueInput[]
+    update?: MissaoUpdateWithWhereUniqueWithoutConcorrenteInput | MissaoUpdateWithWhereUniqueWithoutConcorrenteInput[]
+    updateMany?: MissaoUpdateManyWithWhereWithoutConcorrenteInput | MissaoUpdateManyWithWhereWithoutConcorrenteInput[]
+    deleteMany?: MissaoScalarWhereInput | MissaoScalarWhereInput[]
+  }
+
+  export type MissaoUncheckedUpdateManyWithoutConcorrenteNestedInput = {
+    create?: XOR<MissaoCreateWithoutConcorrenteInput, MissaoUncheckedCreateWithoutConcorrenteInput> | MissaoCreateWithoutConcorrenteInput[] | MissaoUncheckedCreateWithoutConcorrenteInput[]
+    connectOrCreate?: MissaoCreateOrConnectWithoutConcorrenteInput | MissaoCreateOrConnectWithoutConcorrenteInput[]
+    upsert?: MissaoUpsertWithWhereUniqueWithoutConcorrenteInput | MissaoUpsertWithWhereUniqueWithoutConcorrenteInput[]
+    createMany?: MissaoCreateManyConcorrenteInputEnvelope
+    set?: MissaoWhereUniqueInput | MissaoWhereUniqueInput[]
+    disconnect?: MissaoWhereUniqueInput | MissaoWhereUniqueInput[]
+    delete?: MissaoWhereUniqueInput | MissaoWhereUniqueInput[]
+    connect?: MissaoWhereUniqueInput | MissaoWhereUniqueInput[]
+    update?: MissaoUpdateWithWhereUniqueWithoutConcorrenteInput | MissaoUpdateWithWhereUniqueWithoutConcorrenteInput[]
+    updateMany?: MissaoUpdateManyWithWhereWithoutConcorrenteInput | MissaoUpdateManyWithWhereWithoutConcorrenteInput[]
+    deleteMany?: MissaoScalarWhereInput | MissaoScalarWhereInput[]
+  }
+
+  export type MissaoProdutoCreateNestedManyWithoutProdutoInput = {
+    create?: XOR<MissaoProdutoCreateWithoutProdutoInput, MissaoProdutoUncheckedCreateWithoutProdutoInput> | MissaoProdutoCreateWithoutProdutoInput[] | MissaoProdutoUncheckedCreateWithoutProdutoInput[]
+    connectOrCreate?: MissaoProdutoCreateOrConnectWithoutProdutoInput | MissaoProdutoCreateOrConnectWithoutProdutoInput[]
+    createMany?: MissaoProdutoCreateManyProdutoInputEnvelope
+    connect?: MissaoProdutoWhereUniqueInput | MissaoProdutoWhereUniqueInput[]
+  }
+
+  export type MissaoProdutoUncheckedCreateNestedManyWithoutProdutoInput = {
+    create?: XOR<MissaoProdutoCreateWithoutProdutoInput, MissaoProdutoUncheckedCreateWithoutProdutoInput> | MissaoProdutoCreateWithoutProdutoInput[] | MissaoProdutoUncheckedCreateWithoutProdutoInput[]
+    connectOrCreate?: MissaoProdutoCreateOrConnectWithoutProdutoInput | MissaoProdutoCreateOrConnectWithoutProdutoInput[]
+    createMany?: MissaoProdutoCreateManyProdutoInputEnvelope
+    connect?: MissaoProdutoWhereUniqueInput | MissaoProdutoWhereUniqueInput[]
+  }
+
   export type FloatFieldUpdateOperationsInput = {
     set?: number
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type MissaoProdutoUpdateManyWithoutProdutoNestedInput = {
+    create?: XOR<MissaoProdutoCreateWithoutProdutoInput, MissaoProdutoUncheckedCreateWithoutProdutoInput> | MissaoProdutoCreateWithoutProdutoInput[] | MissaoProdutoUncheckedCreateWithoutProdutoInput[]
+    connectOrCreate?: MissaoProdutoCreateOrConnectWithoutProdutoInput | MissaoProdutoCreateOrConnectWithoutProdutoInput[]
+    upsert?: MissaoProdutoUpsertWithWhereUniqueWithoutProdutoInput | MissaoProdutoUpsertWithWhereUniqueWithoutProdutoInput[]
+    createMany?: MissaoProdutoCreateManyProdutoInputEnvelope
+    set?: MissaoProdutoWhereUniqueInput | MissaoProdutoWhereUniqueInput[]
+    disconnect?: MissaoProdutoWhereUniqueInput | MissaoProdutoWhereUniqueInput[]
+    delete?: MissaoProdutoWhereUniqueInput | MissaoProdutoWhereUniqueInput[]
+    connect?: MissaoProdutoWhereUniqueInput | MissaoProdutoWhereUniqueInput[]
+    update?: MissaoProdutoUpdateWithWhereUniqueWithoutProdutoInput | MissaoProdutoUpdateWithWhereUniqueWithoutProdutoInput[]
+    updateMany?: MissaoProdutoUpdateManyWithWhereWithoutProdutoInput | MissaoProdutoUpdateManyWithWhereWithoutProdutoInput[]
+    deleteMany?: MissaoProdutoScalarWhereInput | MissaoProdutoScalarWhereInput[]
+  }
+
+  export type MissaoProdutoUncheckedUpdateManyWithoutProdutoNestedInput = {
+    create?: XOR<MissaoProdutoCreateWithoutProdutoInput, MissaoProdutoUncheckedCreateWithoutProdutoInput> | MissaoProdutoCreateWithoutProdutoInput[] | MissaoProdutoUncheckedCreateWithoutProdutoInput[]
+    connectOrCreate?: MissaoProdutoCreateOrConnectWithoutProdutoInput | MissaoProdutoCreateOrConnectWithoutProdutoInput[]
+    upsert?: MissaoProdutoUpsertWithWhereUniqueWithoutProdutoInput | MissaoProdutoUpsertWithWhereUniqueWithoutProdutoInput[]
+    createMany?: MissaoProdutoCreateManyProdutoInputEnvelope
+    set?: MissaoProdutoWhereUniqueInput | MissaoProdutoWhereUniqueInput[]
+    disconnect?: MissaoProdutoWhereUniqueInput | MissaoProdutoWhereUniqueInput[]
+    delete?: MissaoProdutoWhereUniqueInput | MissaoProdutoWhereUniqueInput[]
+    connect?: MissaoProdutoWhereUniqueInput | MissaoProdutoWhereUniqueInput[]
+    update?: MissaoProdutoUpdateWithWhereUniqueWithoutProdutoInput | MissaoProdutoUpdateWithWhereUniqueWithoutProdutoInput[]
+    updateMany?: MissaoProdutoUpdateManyWithWhereWithoutProdutoInput | MissaoProdutoUpdateManyWithWhereWithoutProdutoInput[]
+    deleteMany?: MissaoProdutoScalarWhereInput | MissaoProdutoScalarWhereInput[]
+  }
+
+  export type ConcorrenteCreateNestedOneWithoutMissoesInput = {
+    create?: XOR<ConcorrenteCreateWithoutMissoesInput, ConcorrenteUncheckedCreateWithoutMissoesInput>
+    connectOrCreate?: ConcorrenteCreateOrConnectWithoutMissoesInput
+    connect?: ConcorrenteWhereUniqueInput
+  }
+
+  export type MissaoProdutoCreateNestedManyWithoutMissaoInput = {
+    create?: XOR<MissaoProdutoCreateWithoutMissaoInput, MissaoProdutoUncheckedCreateWithoutMissaoInput> | MissaoProdutoCreateWithoutMissaoInput[] | MissaoProdutoUncheckedCreateWithoutMissaoInput[]
+    connectOrCreate?: MissaoProdutoCreateOrConnectWithoutMissaoInput | MissaoProdutoCreateOrConnectWithoutMissaoInput[]
+    createMany?: MissaoProdutoCreateManyMissaoInputEnvelope
+    connect?: MissaoProdutoWhereUniqueInput | MissaoProdutoWhereUniqueInput[]
+  }
+
+  export type MissaoProdutoUncheckedCreateNestedManyWithoutMissaoInput = {
+    create?: XOR<MissaoProdutoCreateWithoutMissaoInput, MissaoProdutoUncheckedCreateWithoutMissaoInput> | MissaoProdutoCreateWithoutMissaoInput[] | MissaoProdutoUncheckedCreateWithoutMissaoInput[]
+    connectOrCreate?: MissaoProdutoCreateOrConnectWithoutMissaoInput | MissaoProdutoCreateOrConnectWithoutMissaoInput[]
+    createMany?: MissaoProdutoCreateManyMissaoInputEnvelope
+    connect?: MissaoProdutoWhereUniqueInput | MissaoProdutoWhereUniqueInput[]
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
+  export type ConcorrenteUpdateOneRequiredWithoutMissoesNestedInput = {
+    create?: XOR<ConcorrenteCreateWithoutMissoesInput, ConcorrenteUncheckedCreateWithoutMissoesInput>
+    connectOrCreate?: ConcorrenteCreateOrConnectWithoutMissoesInput
+    upsert?: ConcorrenteUpsertWithoutMissoesInput
+    connect?: ConcorrenteWhereUniqueInput
+    update?: XOR<XOR<ConcorrenteUpdateToOneWithWhereWithoutMissoesInput, ConcorrenteUpdateWithoutMissoesInput>, ConcorrenteUncheckedUpdateWithoutMissoesInput>
+  }
+
+  export type MissaoProdutoUpdateManyWithoutMissaoNestedInput = {
+    create?: XOR<MissaoProdutoCreateWithoutMissaoInput, MissaoProdutoUncheckedCreateWithoutMissaoInput> | MissaoProdutoCreateWithoutMissaoInput[] | MissaoProdutoUncheckedCreateWithoutMissaoInput[]
+    connectOrCreate?: MissaoProdutoCreateOrConnectWithoutMissaoInput | MissaoProdutoCreateOrConnectWithoutMissaoInput[]
+    upsert?: MissaoProdutoUpsertWithWhereUniqueWithoutMissaoInput | MissaoProdutoUpsertWithWhereUniqueWithoutMissaoInput[]
+    createMany?: MissaoProdutoCreateManyMissaoInputEnvelope
+    set?: MissaoProdutoWhereUniqueInput | MissaoProdutoWhereUniqueInput[]
+    disconnect?: MissaoProdutoWhereUniqueInput | MissaoProdutoWhereUniqueInput[]
+    delete?: MissaoProdutoWhereUniqueInput | MissaoProdutoWhereUniqueInput[]
+    connect?: MissaoProdutoWhereUniqueInput | MissaoProdutoWhereUniqueInput[]
+    update?: MissaoProdutoUpdateWithWhereUniqueWithoutMissaoInput | MissaoProdutoUpdateWithWhereUniqueWithoutMissaoInput[]
+    updateMany?: MissaoProdutoUpdateManyWithWhereWithoutMissaoInput | MissaoProdutoUpdateManyWithWhereWithoutMissaoInput[]
+    deleteMany?: MissaoProdutoScalarWhereInput | MissaoProdutoScalarWhereInput[]
+  }
+
+  export type MissaoProdutoUncheckedUpdateManyWithoutMissaoNestedInput = {
+    create?: XOR<MissaoProdutoCreateWithoutMissaoInput, MissaoProdutoUncheckedCreateWithoutMissaoInput> | MissaoProdutoCreateWithoutMissaoInput[] | MissaoProdutoUncheckedCreateWithoutMissaoInput[]
+    connectOrCreate?: MissaoProdutoCreateOrConnectWithoutMissaoInput | MissaoProdutoCreateOrConnectWithoutMissaoInput[]
+    upsert?: MissaoProdutoUpsertWithWhereUniqueWithoutMissaoInput | MissaoProdutoUpsertWithWhereUniqueWithoutMissaoInput[]
+    createMany?: MissaoProdutoCreateManyMissaoInputEnvelope
+    set?: MissaoProdutoWhereUniqueInput | MissaoProdutoWhereUniqueInput[]
+    disconnect?: MissaoProdutoWhereUniqueInput | MissaoProdutoWhereUniqueInput[]
+    delete?: MissaoProdutoWhereUniqueInput | MissaoProdutoWhereUniqueInput[]
+    connect?: MissaoProdutoWhereUniqueInput | MissaoProdutoWhereUniqueInput[]
+    update?: MissaoProdutoUpdateWithWhereUniqueWithoutMissaoInput | MissaoProdutoUpdateWithWhereUniqueWithoutMissaoInput[]
+    updateMany?: MissaoProdutoUpdateManyWithWhereWithoutMissaoInput | MissaoProdutoUpdateManyWithWhereWithoutMissaoInput[]
+    deleteMany?: MissaoProdutoScalarWhereInput | MissaoProdutoScalarWhereInput[]
+  }
+
+  export type MissaoCreateNestedOneWithoutProdutosInput = {
+    create?: XOR<MissaoCreateWithoutProdutosInput, MissaoUncheckedCreateWithoutProdutosInput>
+    connectOrCreate?: MissaoCreateOrConnectWithoutProdutosInput
+    connect?: MissaoWhereUniqueInput
+  }
+
+  export type ProdutoCreateNestedOneWithoutMissoesInput = {
+    create?: XOR<ProdutoCreateWithoutMissoesInput, ProdutoUncheckedCreateWithoutMissoesInput>
+    connectOrCreate?: ProdutoCreateOrConnectWithoutMissoesInput
+    connect?: ProdutoWhereUniqueInput
+  }
+
+  export type MissaoUpdateOneRequiredWithoutProdutosNestedInput = {
+    create?: XOR<MissaoCreateWithoutProdutosInput, MissaoUncheckedCreateWithoutProdutosInput>
+    connectOrCreate?: MissaoCreateOrConnectWithoutProdutosInput
+    upsert?: MissaoUpsertWithoutProdutosInput
+    connect?: MissaoWhereUniqueInput
+    update?: XOR<XOR<MissaoUpdateToOneWithWhereWithoutProdutosInput, MissaoUpdateWithoutProdutosInput>, MissaoUncheckedUpdateWithoutProdutosInput>
+  }
+
+  export type ProdutoUpdateOneRequiredWithoutMissoesNestedInput = {
+    create?: XOR<ProdutoCreateWithoutMissoesInput, ProdutoUncheckedCreateWithoutMissoesInput>
+    connectOrCreate?: ProdutoCreateOrConnectWithoutMissoesInput
+    upsert?: ProdutoUpsertWithoutMissoesInput
+    connect?: ProdutoWhereUniqueInput
+    update?: XOR<XOR<ProdutoUpdateToOneWithWhereWithoutMissoesInput, ProdutoUpdateWithoutMissoesInput>, ProdutoUncheckedUpdateWithoutMissoesInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -4948,6 +8134,367 @@ export namespace Prisma {
     _sum?: NestedFloatFilter<$PrismaModel>
     _min?: NestedFloatFilter<$PrismaModel>
     _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type MissaoCreateWithoutConcorrenteInput = {
+    titulo: string
+    status?: string
+    criadaEm?: Date | string
+    produtos?: MissaoProdutoCreateNestedManyWithoutMissaoInput
+  }
+
+  export type MissaoUncheckedCreateWithoutConcorrenteInput = {
+    id?: number
+    titulo: string
+    status?: string
+    criadaEm?: Date | string
+    produtos?: MissaoProdutoUncheckedCreateNestedManyWithoutMissaoInput
+  }
+
+  export type MissaoCreateOrConnectWithoutConcorrenteInput = {
+    where: MissaoWhereUniqueInput
+    create: XOR<MissaoCreateWithoutConcorrenteInput, MissaoUncheckedCreateWithoutConcorrenteInput>
+  }
+
+  export type MissaoCreateManyConcorrenteInputEnvelope = {
+    data: MissaoCreateManyConcorrenteInput | MissaoCreateManyConcorrenteInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MissaoUpsertWithWhereUniqueWithoutConcorrenteInput = {
+    where: MissaoWhereUniqueInput
+    update: XOR<MissaoUpdateWithoutConcorrenteInput, MissaoUncheckedUpdateWithoutConcorrenteInput>
+    create: XOR<MissaoCreateWithoutConcorrenteInput, MissaoUncheckedCreateWithoutConcorrenteInput>
+  }
+
+  export type MissaoUpdateWithWhereUniqueWithoutConcorrenteInput = {
+    where: MissaoWhereUniqueInput
+    data: XOR<MissaoUpdateWithoutConcorrenteInput, MissaoUncheckedUpdateWithoutConcorrenteInput>
+  }
+
+  export type MissaoUpdateManyWithWhereWithoutConcorrenteInput = {
+    where: MissaoScalarWhereInput
+    data: XOR<MissaoUpdateManyMutationInput, MissaoUncheckedUpdateManyWithoutConcorrenteInput>
+  }
+
+  export type MissaoScalarWhereInput = {
+    AND?: MissaoScalarWhereInput | MissaoScalarWhereInput[]
+    OR?: MissaoScalarWhereInput[]
+    NOT?: MissaoScalarWhereInput | MissaoScalarWhereInput[]
+    id?: IntFilter<"Missao"> | number
+    titulo?: StringFilter<"Missao"> | string
+    status?: StringFilter<"Missao"> | string
+    criadaEm?: DateTimeFilter<"Missao"> | Date | string
+    concorrenteId?: IntFilter<"Missao"> | number
+  }
+
+  export type MissaoProdutoCreateWithoutProdutoInput = {
+    missao: MissaoCreateNestedOneWithoutProdutosInput
+  }
+
+  export type MissaoProdutoUncheckedCreateWithoutProdutoInput = {
+    id?: number
+    missaoId: number
+  }
+
+  export type MissaoProdutoCreateOrConnectWithoutProdutoInput = {
+    where: MissaoProdutoWhereUniqueInput
+    create: XOR<MissaoProdutoCreateWithoutProdutoInput, MissaoProdutoUncheckedCreateWithoutProdutoInput>
+  }
+
+  export type MissaoProdutoCreateManyProdutoInputEnvelope = {
+    data: MissaoProdutoCreateManyProdutoInput | MissaoProdutoCreateManyProdutoInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MissaoProdutoUpsertWithWhereUniqueWithoutProdutoInput = {
+    where: MissaoProdutoWhereUniqueInput
+    update: XOR<MissaoProdutoUpdateWithoutProdutoInput, MissaoProdutoUncheckedUpdateWithoutProdutoInput>
+    create: XOR<MissaoProdutoCreateWithoutProdutoInput, MissaoProdutoUncheckedCreateWithoutProdutoInput>
+  }
+
+  export type MissaoProdutoUpdateWithWhereUniqueWithoutProdutoInput = {
+    where: MissaoProdutoWhereUniqueInput
+    data: XOR<MissaoProdutoUpdateWithoutProdutoInput, MissaoProdutoUncheckedUpdateWithoutProdutoInput>
+  }
+
+  export type MissaoProdutoUpdateManyWithWhereWithoutProdutoInput = {
+    where: MissaoProdutoScalarWhereInput
+    data: XOR<MissaoProdutoUpdateManyMutationInput, MissaoProdutoUncheckedUpdateManyWithoutProdutoInput>
+  }
+
+  export type MissaoProdutoScalarWhereInput = {
+    AND?: MissaoProdutoScalarWhereInput | MissaoProdutoScalarWhereInput[]
+    OR?: MissaoProdutoScalarWhereInput[]
+    NOT?: MissaoProdutoScalarWhereInput | MissaoProdutoScalarWhereInput[]
+    id?: IntFilter<"MissaoProduto"> | number
+    missaoId?: IntFilter<"MissaoProduto"> | number
+    produtoId?: IntFilter<"MissaoProduto"> | number
+  }
+
+  export type ConcorrenteCreateWithoutMissoesInput = {
+    nome: string
+    tipo: string
+    endereco: string
+    foto?: string | null
+  }
+
+  export type ConcorrenteUncheckedCreateWithoutMissoesInput = {
+    id?: number
+    nome: string
+    tipo: string
+    endereco: string
+    foto?: string | null
+  }
+
+  export type ConcorrenteCreateOrConnectWithoutMissoesInput = {
+    where: ConcorrenteWhereUniqueInput
+    create: XOR<ConcorrenteCreateWithoutMissoesInput, ConcorrenteUncheckedCreateWithoutMissoesInput>
+  }
+
+  export type MissaoProdutoCreateWithoutMissaoInput = {
+    produto: ProdutoCreateNestedOneWithoutMissoesInput
+  }
+
+  export type MissaoProdutoUncheckedCreateWithoutMissaoInput = {
+    id?: number
+    produtoId: number
+  }
+
+  export type MissaoProdutoCreateOrConnectWithoutMissaoInput = {
+    where: MissaoProdutoWhereUniqueInput
+    create: XOR<MissaoProdutoCreateWithoutMissaoInput, MissaoProdutoUncheckedCreateWithoutMissaoInput>
+  }
+
+  export type MissaoProdutoCreateManyMissaoInputEnvelope = {
+    data: MissaoProdutoCreateManyMissaoInput | MissaoProdutoCreateManyMissaoInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ConcorrenteUpsertWithoutMissoesInput = {
+    update: XOR<ConcorrenteUpdateWithoutMissoesInput, ConcorrenteUncheckedUpdateWithoutMissoesInput>
+    create: XOR<ConcorrenteCreateWithoutMissoesInput, ConcorrenteUncheckedCreateWithoutMissoesInput>
+    where?: ConcorrenteWhereInput
+  }
+
+  export type ConcorrenteUpdateToOneWithWhereWithoutMissoesInput = {
+    where?: ConcorrenteWhereInput
+    data: XOR<ConcorrenteUpdateWithoutMissoesInput, ConcorrenteUncheckedUpdateWithoutMissoesInput>
+  }
+
+  export type ConcorrenteUpdateWithoutMissoesInput = {
+    nome?: StringFieldUpdateOperationsInput | string
+    tipo?: StringFieldUpdateOperationsInput | string
+    endereco?: StringFieldUpdateOperationsInput | string
+    foto?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ConcorrenteUncheckedUpdateWithoutMissoesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nome?: StringFieldUpdateOperationsInput | string
+    tipo?: StringFieldUpdateOperationsInput | string
+    endereco?: StringFieldUpdateOperationsInput | string
+    foto?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type MissaoProdutoUpsertWithWhereUniqueWithoutMissaoInput = {
+    where: MissaoProdutoWhereUniqueInput
+    update: XOR<MissaoProdutoUpdateWithoutMissaoInput, MissaoProdutoUncheckedUpdateWithoutMissaoInput>
+    create: XOR<MissaoProdutoCreateWithoutMissaoInput, MissaoProdutoUncheckedCreateWithoutMissaoInput>
+  }
+
+  export type MissaoProdutoUpdateWithWhereUniqueWithoutMissaoInput = {
+    where: MissaoProdutoWhereUniqueInput
+    data: XOR<MissaoProdutoUpdateWithoutMissaoInput, MissaoProdutoUncheckedUpdateWithoutMissaoInput>
+  }
+
+  export type MissaoProdutoUpdateManyWithWhereWithoutMissaoInput = {
+    where: MissaoProdutoScalarWhereInput
+    data: XOR<MissaoProdutoUpdateManyMutationInput, MissaoProdutoUncheckedUpdateManyWithoutMissaoInput>
+  }
+
+  export type MissaoCreateWithoutProdutosInput = {
+    titulo: string
+    status?: string
+    criadaEm?: Date | string
+    concorrente: ConcorrenteCreateNestedOneWithoutMissoesInput
+  }
+
+  export type MissaoUncheckedCreateWithoutProdutosInput = {
+    id?: number
+    titulo: string
+    status?: string
+    criadaEm?: Date | string
+    concorrenteId: number
+  }
+
+  export type MissaoCreateOrConnectWithoutProdutosInput = {
+    where: MissaoWhereUniqueInput
+    create: XOR<MissaoCreateWithoutProdutosInput, MissaoUncheckedCreateWithoutProdutosInput>
+  }
+
+  export type ProdutoCreateWithoutMissoesInput = {
+    nome: string
+    codigo?: string | null
+    preco: number
+    foto?: string | null
+  }
+
+  export type ProdutoUncheckedCreateWithoutMissoesInput = {
+    id?: number
+    nome: string
+    codigo?: string | null
+    preco: number
+    foto?: string | null
+  }
+
+  export type ProdutoCreateOrConnectWithoutMissoesInput = {
+    where: ProdutoWhereUniqueInput
+    create: XOR<ProdutoCreateWithoutMissoesInput, ProdutoUncheckedCreateWithoutMissoesInput>
+  }
+
+  export type MissaoUpsertWithoutProdutosInput = {
+    update: XOR<MissaoUpdateWithoutProdutosInput, MissaoUncheckedUpdateWithoutProdutosInput>
+    create: XOR<MissaoCreateWithoutProdutosInput, MissaoUncheckedCreateWithoutProdutosInput>
+    where?: MissaoWhereInput
+  }
+
+  export type MissaoUpdateToOneWithWhereWithoutProdutosInput = {
+    where?: MissaoWhereInput
+    data: XOR<MissaoUpdateWithoutProdutosInput, MissaoUncheckedUpdateWithoutProdutosInput>
+  }
+
+  export type MissaoUpdateWithoutProdutosInput = {
+    titulo?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    criadaEm?: DateTimeFieldUpdateOperationsInput | Date | string
+    concorrente?: ConcorrenteUpdateOneRequiredWithoutMissoesNestedInput
+  }
+
+  export type MissaoUncheckedUpdateWithoutProdutosInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    titulo?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    criadaEm?: DateTimeFieldUpdateOperationsInput | Date | string
+    concorrenteId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ProdutoUpsertWithoutMissoesInput = {
+    update: XOR<ProdutoUpdateWithoutMissoesInput, ProdutoUncheckedUpdateWithoutMissoesInput>
+    create: XOR<ProdutoCreateWithoutMissoesInput, ProdutoUncheckedCreateWithoutMissoesInput>
+    where?: ProdutoWhereInput
+  }
+
+  export type ProdutoUpdateToOneWithWhereWithoutMissoesInput = {
+    where?: ProdutoWhereInput
+    data: XOR<ProdutoUpdateWithoutMissoesInput, ProdutoUncheckedUpdateWithoutMissoesInput>
+  }
+
+  export type ProdutoUpdateWithoutMissoesInput = {
+    nome?: StringFieldUpdateOperationsInput | string
+    codigo?: NullableStringFieldUpdateOperationsInput | string | null
+    preco?: FloatFieldUpdateOperationsInput | number
+    foto?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ProdutoUncheckedUpdateWithoutMissoesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nome?: StringFieldUpdateOperationsInput | string
+    codigo?: NullableStringFieldUpdateOperationsInput | string | null
+    preco?: FloatFieldUpdateOperationsInput | number
+    foto?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type MissaoCreateManyConcorrenteInput = {
+    id?: number
+    titulo: string
+    status?: string
+    criadaEm?: Date | string
+  }
+
+  export type MissaoUpdateWithoutConcorrenteInput = {
+    titulo?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    criadaEm?: DateTimeFieldUpdateOperationsInput | Date | string
+    produtos?: MissaoProdutoUpdateManyWithoutMissaoNestedInput
+  }
+
+  export type MissaoUncheckedUpdateWithoutConcorrenteInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    titulo?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    criadaEm?: DateTimeFieldUpdateOperationsInput | Date | string
+    produtos?: MissaoProdutoUncheckedUpdateManyWithoutMissaoNestedInput
+  }
+
+  export type MissaoUncheckedUpdateManyWithoutConcorrenteInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    titulo?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    criadaEm?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MissaoProdutoCreateManyProdutoInput = {
+    id?: number
+    missaoId: number
+  }
+
+  export type MissaoProdutoUpdateWithoutProdutoInput = {
+    missao?: MissaoUpdateOneRequiredWithoutProdutosNestedInput
+  }
+
+  export type MissaoProdutoUncheckedUpdateWithoutProdutoInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    missaoId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type MissaoProdutoUncheckedUpdateManyWithoutProdutoInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    missaoId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type MissaoProdutoCreateManyMissaoInput = {
+    id?: number
+    produtoId: number
+  }
+
+  export type MissaoProdutoUpdateWithoutMissaoInput = {
+    produto?: ProdutoUpdateOneRequiredWithoutMissoesNestedInput
+  }
+
+  export type MissaoProdutoUncheckedUpdateWithoutMissaoInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    produtoId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type MissaoProdutoUncheckedUpdateManyWithoutMissaoInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    produtoId?: IntFieldUpdateOperationsInput | number
   }
 
 

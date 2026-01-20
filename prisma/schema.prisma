@@ -25,11 +25,13 @@ model Usuario {
 }
 
 model Concorrente {
-  id       Int     @id @default(autoincrement())
+  id       Int      @id @default(autoincrement())
   nome     String
   tipo     String
   endereco String
   foto     String?
+
+  missoes  Missao[]
 
   @@map("concorrentes")
 }
@@ -41,5 +43,34 @@ model Produto {
   preco  Float
   foto   String?
 
+  missoes MissaoProduto[]
+
   @@map("produtos")
+}
+
+model Missao {
+  id             Int      @id @default(autoincrement())
+  titulo         String
+  status         String   @default("pendente")
+  criadaEm       DateTime @default(now())
+
+  concorrenteId Int
+  concorrente   Concorrente @relation(fields: [concorrenteId], references: [id])
+
+  produtos      MissaoProduto[]
+
+  @@map("missoes")
+}
+
+model MissaoProduto {
+  id        Int @id @default(autoincrement())
+
+  missaoId  Int
+  produtoId Int
+
+  missao   Missao   @relation(fields: [missaoId], references: [id])
+  produto  Produto  @relation(fields: [produtoId], references: [id])
+
+  @@unique([missaoId, produtoId])
+  @@map("missao_produtos")
 }

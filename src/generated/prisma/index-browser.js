@@ -145,6 +145,20 @@ exports.Prisma.ProdutoScalarFieldEnum = {
   foto: 'foto'
 };
 
+exports.Prisma.MissaoScalarFieldEnum = {
+  id: 'id',
+  titulo: 'titulo',
+  status: 'status',
+  criadaEm: 'criadaEm',
+  concorrenteId: 'concorrenteId'
+};
+
+exports.Prisma.MissaoProdutoScalarFieldEnum = {
+  id: 'id',
+  missaoId: 'missaoId',
+  produtoId: 'produtoId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -164,7 +178,9 @@ exports.Prisma.NullsOrder = {
 exports.Prisma.ModelName = {
   Usuario: 'Usuario',
   Concorrente: 'Concorrente',
-  Produto: 'Produto'
+  Produto: 'Produto',
+  Missao: 'Missao',
+  MissaoProduto: 'MissaoProduto'
 };
 
 /**
