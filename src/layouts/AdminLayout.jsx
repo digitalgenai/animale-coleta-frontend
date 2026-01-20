@@ -4,7 +4,7 @@ import Header from "../components/Header";
 
 const AdminLayout = () => {
     return (
-        <div className="h-screen flex flex-col bg-stone-100">
+        <div className="h-dvh flex flex-col bg-stone-100">
             <Header />
             <div className="flex-1 p-4 pb-6 overflow-auto">
                 <Outlet />
