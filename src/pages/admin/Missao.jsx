@@ -88,9 +88,10 @@ const Missao = () => {
                 rowKey={"id"}
                 loading={missaoFetching}
                 className="rounded-lg overflow-hidden shadow-xl"
-                showHeader={false}
+                // showHeader={false}
             >
                 <Table.Column
+                    title="Missão"
                     render={(_, linha) => (
                         <div className="">
                             <div>{linha.titulo}</div>

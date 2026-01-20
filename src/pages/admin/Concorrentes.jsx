@@ -84,9 +84,10 @@ const Concorrentes = () => {
                 rowKey={"id"}
                 loading={concorrentesFetching}
                 className="rounded-lg overflow-hidden shadow-xl"
-                showHeader={false}
+                // showHeader={false}
             >
                 <Table.Column
+                    title="Concorrente"
                     render={(_, linha) => (
                         <div className="">
                             <div className="flex gap-4 items-start">
