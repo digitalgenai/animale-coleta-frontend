@@ -31,6 +31,21 @@ export const useCriarProduto = () => {
     });
 }
 
+export const useImportarProduto = () => {
+    return useMutation({
+        mutationFn: async (dados) => {
+            const formData = new FormData();
+            const file = dados.arquivo[0].originFileObj;
+            formData.append("arquivo", file);
+            const response = await AXIOS.post('/produtos/importar', formData);
+            return response.data;
+        },
+        onSuccess: () => {
+            QUERYCLIENT.invalidateQueries({ queryKey: ['produtos'] });
+        }
+    });
+};
+
 export const useEditarProduto = () => {
     return useMutation({
         mutationFn: async (dados) => {

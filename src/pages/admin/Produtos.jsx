@@ -1,20 +1,108 @@
 import { Button, Drawer, Form, Image, Input, InputNumber, Popconfirm, Table, Tag, Upload } from "antd";
 import { useContext, useState } from "react";
 import { LuImage, LuUpload } from "react-icons/lu";
-import { useBuscarProduto, useCriarProduto, useDeletarProduto, useEditarProduto } from "../../hooks/produtoHooks";
+import { useBuscarProduto, useCriarProduto, useDeletarProduto, useEditarProduto, useImportarProduto } from "../../hooks/produtoHooks";
 import { MainContext } from './../../contexts/MainContext';
+import * as XLSX from 'xlsx';
 
 const Produtos = () => {
 
     const [verCriar, setVerCriar] = useState(false);
     const [verEditar, setVerEditar] = useState(false);
+    const [verImportar, setVerImportar] = useState(false);
     const [formCriar] = Form.useForm();
     const [formEditar] = Form.useForm();
+    const [formImportar] = Form.useForm();
     const { data: produtos, isFetching: produtosFetching } = useBuscarProduto();
-    const { mutateAsync: criarProduto } = useCriarProduto();
-    const { mutateAsync: editarProduto } = useEditarProduto();
+    const { mutateAsync: criarProduto, isPending: criarPending } = useCriarProduto();
+    const { mutateAsync: editarProduto, isPending: editarPending } = useEditarProduto();
     const { mutateAsync: deletarProduto } = useDeletarProduto();
+    const { mutateAsync: importarProduto, isPending: importarPending } = useImportarProduto();
     const { api } = useContext(MainContext);
+
+    const colunasEsperadas = ['codigo', 'nome', 'preco'];
+
+    const validarArquivo = (file) => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+
+            reader.onload = (e) => {
+                const data = new Uint8Array(e.target.result);
+                const workbook = XLSX.read(data, { type: 'array' });
+
+                const sheetName = workbook.SheetNames[0];
+                const worksheet = workbook.Sheets[sheetName];
+
+                const rows = XLSX.utils.sheet_to_json(worksheet, {
+                    header: 1,
+                    defval: '',
+                    blankrows: false
+                });
+
+                if (!rows.length) {
+                    return reject('Arquivo vazio.');
+                }
+
+                const header = rows[0]
+                    .map(col => String(col).trim().toLowerCase());
+
+                const ordemCorreta =
+                    header.length === colunasEsperadas.length &&
+                    header.every((col, index) => col === colunasEsperadas[index]);
+
+                if (!ordemCorreta) {
+                    return reject(
+                        'O cabeçalho deve ser exatamente: codigo, nome, preco.'
+                    );
+                }
+
+                for (let i = 1; i < rows.length; i++) {
+                    const [codigo, nome, preco] = rows[i];
+
+                    const linhaVazia =
+                        !codigo && !nome && !preco;
+
+                    if (linhaVazia) {
+                        return reject(
+                            `Linha ${i + 1} está vazia.`
+                        );
+                    }
+
+                    if (!codigo || !nome || preco === '') {
+                        return reject(
+                            `Linha ${i + 1} possui campos obrigatórios vazios.`
+                        );
+                    }
+
+                    if (isNaN(Number(preco))) {
+                        return reject(
+                            `Linha ${i + 1}: o campo "preco" deve ser numérico.`
+                        );
+                    }
+                }
+                resolve();
+            };
+
+            reader.readAsArrayBuffer(file);
+        });
+    };
+
+    function importar(dados) {
+        importarProduto(dados, {
+            onSuccess: (response) => {
+                api[response.type]({
+                    description: response.description
+                });
+            },
+            onError: ({response}) => {
+                api[response.data.type]({
+                    description: response.data.description
+                });
+            },
+        });
+        formImportar.resetFields();
+        setVerCriar(false);
+    }
 
     function criar(dados) {
         criarProduto(dados, {
@@ -74,7 +162,7 @@ const Produtos = () => {
                         shape="round"
                         size="large"
                         className="w-full"
-                        onClick={() => setVerCriar(true)}
+                        onClick={() => setVerImportar(true)}
                     >
                         Importar produtos
                     </Button>
@@ -95,9 +183,16 @@ const Produtos = () => {
                 rowKey={"id"}
                 loading={produtosFetching}
                 className="rounded-lg overflow-hidden shadow-xl"
-                showHeader={false}
+                // showHeader={false}
             >
+                <Table.Column 
+                    title="ID"
+                    dataIndex={'id'}
+                    key={'id'}
+                    className="text-azul!"
+                />
                 <Table.Column
+                    title="Produto"
                     render={(_, linha) => (
                         <div className="">
                             <div className="flex gap-4 items-start">
@@ -203,6 +298,7 @@ const Produtos = () => {
                             htmlType="submit"
                             shape="round"
                             className="w-25!"
+                            loading={criarPending}
                         >
                             Criar
                         </Button>
@@ -272,8 +368,63 @@ const Produtos = () => {
                             htmlType="submit"
                             shape="round"
                             className="w-25!"
+                            loading={editarPending}
                         >
                             Editar
+                        </Button>
+                    </div>
+                </Form>
+            </Drawer>
+
+            <Drawer
+                title="Importar"
+                open={verImportar}
+                onClose={() => setVerImportar(false)}
+            >
+                <Form
+                    layout="vertical"
+                    onFinish={importar}
+                    encType="multipart/form-data"
+                    form={formImportar}
+                >
+                    <Form.Item
+                        label="Arquivo"
+                        name={'arquivo'}
+                        rules={[{ required: true, message: 'Campo obrigatório' }]}
+                        valuePropName="fileList"
+                        getValueFromEvent={(e) => {
+                            if (Array.isArray(e)) return e;
+                            return e?.fileList;
+                        }}
+                    >
+                        <Upload
+                            accept=".xls,.xlsx,.csv"
+                            maxCount={1}
+                            beforeUpload={async (file) => {
+                                try {
+                                    await validarArquivo(file);
+                                    api.success({ description: 'Arquivo válido!' });
+                                    return false;
+                                } catch (erro) {
+                                    api.error({ description: erro });
+                                    return Upload.LIST_IGNORE;
+                                }
+                            }}
+                        >
+                            <Button type="primary">
+                                <LuUpload /> Carregar arquivo
+                            </Button>
+                        </Upload>
+                    </Form.Item>
+                    <div className="flex justify-end">
+                        <Button
+                            type="primary"
+                            htmlType="submit"
+                            shape="round"
+                            className="w-25!"
+                            loading={importarPending}
+                        >
+                            Importar
                         </Button>
                     </div>
                 </Form>
