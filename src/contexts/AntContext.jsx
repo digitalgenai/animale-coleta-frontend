@@ -11,6 +11,11 @@ const AntContext = ({ children }) => {
                         hoverBorderColor: '#002855',
                         paddingBlock: 8
                     },
+                    InputNumber: {
+                        colorPrimary: '#002855',
+                        hoverBorderColor: '#002855',
+                        paddingBlock: 8
+                    },
                     Button: {
                         colorPrimary: '#FFBF45',
                         colorPrimaryHover: '#EB9A00',

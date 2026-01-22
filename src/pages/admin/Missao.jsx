@@ -94,7 +94,6 @@ const Missao = () => {
                     title="Missão"
                     render={(_, linha) => (
                         <div className="">
-                            <div>{linha.titulo}</div>
                             <div className="flex gap-4 items-start">
                                 {
                                     linha.concorrente.foto ? (

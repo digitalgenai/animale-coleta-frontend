@@ -179,7 +179,7 @@ const Usuarios = () => {
                             <Button
                                 type="primary"
                             >
-                                <LuLoader /> Procurar imagem
+                                <LuUpload /> Procurar imagem
                             </Button>
                         </Upload>
                     </Form.Item>

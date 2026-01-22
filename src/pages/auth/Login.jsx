@@ -1,25 +1,34 @@
 import { Button, Form, Input } from "antd";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useLogin } from './../../hooks/usuarioHooks';
 import { useContext } from "react";
 import { MainContext } from "../../contexts/MainContext";
 import logo from "../../assets/logo.png";
+import { AuthContext } from "../../contexts/AuthProvider";
 
 const Login = () => {
 
-    const { mutateAsync: logar } = useLogin();
+    const { mutateAsync: logar, isPending: loginPending } = useLogin();
     const { api } = useContext(MainContext);
+    const { entrar } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     function login(dados) {
         logar(dados, {
             onSuccess: (response) => {
-                api[response.type]({
-                    description: response.description
-                });
+                if (response.type == "warning") {
+                    api[response.type]({
+                        description: response.description,
+                    });
+                    return;
+                }
+                
+                entrar(response.token, response.usuario);
+                navigate("/admin");
             },
-            onError: (response) => {
-                api[response.type]({
-                    description: response.description
+            onError: (error) => {
+                api[error.response.type]({
+                    description: error.response.description
                 });
             },
         });
@@ -27,7 +36,7 @@ const Login = () => {
 
     return (
         <div className="h-screen flex justify-center items-center bg-azul p-4">
-            <div className="w-[350px] bg-white p-5 rounded-4xl">
+            <div className="w-87.5 bg-white p-5 rounded-4xl">
                 <Form
                     layout="vertical"
                     onFinish={login}
@@ -51,9 +60,9 @@ const Login = () => {
                     >
                         <Input.Password placeholder="********" />
                     </Form.Item>
-                    <div className="text-center">
+                    {/* <div className="text-center">
                         <Link to={'/recuperar'} className="text-azul!">Esqueci minha senha</Link>
-                    </div>
+                    </div> */}
                     <div className="flex justify-center mt-6">
                         <Button
                             type="primary"
@@ -61,6 +70,7 @@ const Login = () => {
                             shape="round"
                             size="large"
                             className="w-full"
+                            loading={loginPending}
                         >
                             Entrar
                         </Button>

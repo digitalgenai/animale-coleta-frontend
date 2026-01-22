@@ -7,7 +7,7 @@ const Menu = () => {
             <ul className="bg-azul rounded-[50px] flex justify-between items-center px-6 shadow-lg shadow-azul/50">
                 <li className="flex-1 h-15">
                     <NavLink 
-                        to={'/'}
+                        to={'/admin'}
                         className={'h-15 block group text-white! [&.active]:text-amarelo! relative'}
                         end
                     >
@@ -17,7 +17,7 @@ const Menu = () => {
                 </li>
                 <li className="flex-1 h-15">
                     <NavLink 
-                        to={'/missoes'}
+                        to={'/admin/missoes'}
                         className={'h-15 block group text-white! [&.active]:text-amarelo! relative'}
                         end
                     >
@@ -27,7 +27,7 @@ const Menu = () => {
                 </li>
                 <li className="flex-1 h-15">
                     <NavLink 
-                        to={'/produtos'}
+                        to={'/admin/produtos'}
                         className={'h-15 block group text-white! [&.active]:text-amarelo! relative'}
                         end
                     >
@@ -37,7 +37,7 @@ const Menu = () => {
                 </li>
                 <li className="flex-1 h-15">
                     <NavLink 
-                        to={'/concorrentes'}
+                        to={'/admin/concorrentes'}
                         className={'h-15 block group text-white! [&.active]:text-amarelo! relative'}
                         end
                     >
@@ -47,7 +47,7 @@ const Menu = () => {
                 </li>
                 <li className="flex-1 h-15">
                     <NavLink 
-                        to={'/usuarios'}
+                        to={'/admin/usuarios'}
                         className={'h-15 block group text-white! [&.active]:text-amarelo! relative'}
                         end
                     >

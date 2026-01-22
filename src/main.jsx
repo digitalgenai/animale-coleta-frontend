@@ -7,18 +7,21 @@ import Rotas from './routes/Rotas'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { QUERYCLIENT } from './services'
 import MainProvider from './contexts/MainContext'
+import AuthProvider from './contexts/AuthProvider'
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AntContext>
-      <QueryClientProvider client={QUERYCLIENT}>
+    <App>
+      <AntContext>
         <MainProvider>
-          <App>
-            <Rotas />
-          </App>
+          <QueryClientProvider client={QUERYCLIENT}>
+            <AuthProvider>
+              <Rotas />
+            </AuthProvider>
+          </QueryClientProvider>
         </MainProvider>
-      </QueryClientProvider>
-    </AntContext>
+      </AntContext>
+    </App>
   </StrictMode>
 )
