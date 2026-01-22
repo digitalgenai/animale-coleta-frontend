@@ -17,7 +17,7 @@ const Header = () => {
                     usuario?.foto ? (
                         <Image src={usuario.foto} className="w-10! h-10! rounded-full object-cover" />
                     ) : (
-                        <div className="w-10 h-10 bg-azul rounded-full border-4 border-azul">
+                        <div className="w-10 h-10 bg-azul rounded-full border-4 border-azul flex justify-center items-center text-white font-bold">
                             {usuario.nome.substring(0, 2)}
                         </div>
                     )
