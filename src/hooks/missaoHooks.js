@@ -1,8 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { AXIOS, QUERYCLIENT } from "../services";
 
-
-
 export const useBuscarMissao = () => {
     return useQuery({
         queryKey: ['missao'],

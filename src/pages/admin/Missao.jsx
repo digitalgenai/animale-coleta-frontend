@@ -88,7 +88,7 @@ const Missao = () => {
                 rowKey={"id"}
                 loading={missaoFetching}
                 className="rounded-lg overflow-hidden shadow-xl"
-                // showHeader={false}
+            // showHeader={false}
             >
                 <Table.Column
                     title="Missão"
@@ -195,7 +195,16 @@ const Missao = () => {
                     </Form.Item>
 
                     <Form.Item
-                        label="Produtos da missão"
+                        label={"Produtos da missão"}
+                        extra={
+                            <Button 
+                                type="primary"
+                                shape="round"
+                                size="large"
+                                className="mt-4! w-full!">
+                                Importar produtos
+                            </Button>
+                        }
                         name="produtos"
                         rules={[{ required: true, message: "Selecione pelo menos um produto" }]}
                     >

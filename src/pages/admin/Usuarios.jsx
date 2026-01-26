@@ -1,14 +1,16 @@
-import { Button, Drawer, Form, Image, Input, Popconfirm, Table, Tag, Upload } from "antd";
+import { Button, Drawer, Form, Image, Input, Popconfirm, Select, Table, Tag, Upload } from "antd";
 import { useContext, useState } from "react";
 import { LuLoader, LuUpload } from "react-icons/lu";
 import { useBuscarUsuario, useCriarUsuario, useDeletarUsuario, useEditarUsuario } from "../../hooks/usuarioHooks";
 import { MainContext } from './../../contexts/MainContext';
+import { useBuscarNivel } from "../../hooks/nivelHooks";
 
 const Usuarios = () => {
 
     const [verCriar, setVerCriar] = useState(false);
     const [verEditar, setVerEditar] = useState(false);
     const [formEditar] = Form.useForm();
+    const { data: niveis,  isFetched: niveisOk } = useBuscarNivel();
     const { data: usuarios, isFetching: usuariosFetching } = useBuscarUsuario();
     const { mutateAsync: criarUsuario } = useCriarUsuario();
     const { mutateAsync: editarUsuario } = useEditarUsuario();
@@ -89,7 +91,6 @@ const Usuarios = () => {
                     render={(_, linha) => (
                         <div className="">
                             <div className="flex gap-4 items-center">
-                                {/* <Tag color={'#002855'}>#{linha.id}</Tag> */}
                                 {
                                     linha.foto ? (
                                         <Image src={linha.foto} className="w-12! h-12! rounded-full object-cover" />
@@ -99,10 +100,11 @@ const Usuarios = () => {
                                         </div>
                                     )
                                 }
-                                <div className="leading-4">
+                                <div className="leading-4 flex-1">
                                     <div className="text-lg leading-5">{linha.nome}</div>
                                     <div>{linha.email}</div>
                                 </div>
+                                <Tag color={'#002855'} variant="outlined">{linha.nivel.nome}</Tag>
                             </div>
                             <div className="flex justify-end gap-4">
                                 <Button
@@ -163,6 +165,21 @@ const Usuarios = () => {
                         rules={[{ required: true, message: 'Campo obrigatório' }]}
                     >
                         <Input />
+                    </Form.Item>
+                    <Form.Item
+                        label="Nível"
+                        name={'nivelId'}
+                        rules={[{ required: true, message: 'Campo obrigatório' }]}
+                    >
+                        <Select 
+                            placeholder={"Escolha o nível"}
+                            options={(niveis || []).map(nivel => {
+                                return {
+                                    value: nivel.id,
+                                    label: nivel.nome
+                                }
+                            })}
+                        />
                     </Form.Item>
                     <Form.Item
                         label="Foto"
@@ -232,6 +249,21 @@ const Usuarios = () => {
                         name={'senha'}
                     >
                         <Input />
+                    </Form.Item>
+                    <Form.Item
+                        label="Nível"
+                        name={'nivelId'}
+                        rules={[{ required: true, message: 'Campo obrigatório' }]}
+                    >
+                        <Select 
+                            placeholder={"Escolha o nível"}
+                            options={(niveis || []).map(nivel => {
+                                return {
+                                    value: nivel.id,
+                                    label: nivel.nome
+                                }
+                            })}
+                        />
                     </Form.Item>
                     <Form.Item
                         label="Foto"
