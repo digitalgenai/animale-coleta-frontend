@@ -11,6 +11,7 @@ import Coletar from "../components/Coletar";
 import MissoesAbertas from "../components/MissoesAbertas";
 import Coletas from "../components/Coletas";
 import RotaProtegida from "./RotaProtegida";
+import Nivel from "../pages/admin/Niveis";
 
 const Rotas = () => {
     return (
@@ -24,6 +25,7 @@ const Rotas = () => {
                     <Route path="/admin/concorrentes" element={<Concorrentes />} />
                     <Route path="/admin/produtos" element={<Produtos />} />
                     <Route path="/admin/missoes" element={<Missao />} />
+                    <Route path="/admin/niveis" element={<Nivel />} />
                 </Route>
                 <Route path="/admin/coletar/:id" element={<Coletar />} />
                 <Route path="/admin/missoes-pendentes" element={<MissoesAbertas />} />
