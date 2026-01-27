@@ -13,11 +13,24 @@ const Painel = () => {
 
     return (
         <div>
-            <h6 className="text-lg font-bold text-azul mb-4">Missões em aberto</h6>
+            <div className="mb-4 flex justify-between items-center">
+                <h6 className="text-lg font-bold text-azul">Missões em aberto</h6>
+                <div className="hidden lg:block">
+                    <Button
+                        type="primary"
+                        shape="round"
+                        size="large"
+                        className="w-37.5"
+                        onClick={() => navigate("/admin/missoes-pendentes")}
+                    >
+                        Ver Todas
+                    </Button>
+                </div>
+            </div>
             <div className="mt-4">
                 {
                     missoesOk ?  (
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                             {
                                 missoes.length > 0 ? missoes.map(missao => (
                                     <Missao
@@ -38,7 +51,7 @@ const Painel = () => {
                     )
                 }
             </div>
-            <div className="flex justify-center mt-6">
+            <div className="flex justify-center mt-6 lg:hidden">
                 <Button
                     type="primary"
                     shape="round"

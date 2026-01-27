@@ -28,7 +28,7 @@ export const useBuscarUlmimasMissao = () => {
     return useQuery({
         queryKey: ['missao'],
         queryFn: async (dados) => {
-            const response = await AXIOS.get('/missao?qtd=2&status=pendente', dados);
+            const response = await AXIOS.get('/missao?qtd=4&status=pendente', dados);
             return response.data;
         }
     });

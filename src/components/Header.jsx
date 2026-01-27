@@ -8,11 +8,15 @@ const Header = () => {
 
     const { sair } = useContext(AuthContext);
     const usuario = JSON.parse(sessionStorage.getItem("usuario"));
-    
+
     return (
-        <header className="bg-white p-4 shadow-xl flex justify-between items-center">
+        <header className="bg-white p-4 lg:px-15 shadow-xl flex justify-between items-center">
             <img src={logo} alt="Animale" />
             <div className="flex gap-3 items-center">
+                <div className="text-right">
+                    <h6 className="text-lg leading-5 text-azul font-semibold">{usuario.nome}</h6>
+                    <h6 className="text-xs leading-3">{usuario.email}</h6>
+                </div>
                 {
                     usuario?.foto ? (
                         <Image src={usuario.foto} className="w-10! h-10! rounded-full object-cover" />
@@ -22,7 +26,7 @@ const Header = () => {
                         </div>
                     )
                 }
-                <LuLogOut size={24} onClick={sair}/>
+                <LuLogOut size={24} onClick={sair} />
             </div>
         </header>
     );
