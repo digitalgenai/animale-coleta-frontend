@@ -183,14 +183,7 @@ const Produtos = () => {
                 rowKey={"id"}
                 loading={produtosFetching}
                 className="rounded-lg overflow-hidden shadow-xl"
-                // showHeader={false}
             >
-                {/* <Table.Column 
-                    title="ID"
-                    dataIndex={'id'}
-                    key={'id'}
-                    className="text-azul!"
-                /> */}
                 <Table.Column
                     title="Produto"
                     render={(_, linha) => (

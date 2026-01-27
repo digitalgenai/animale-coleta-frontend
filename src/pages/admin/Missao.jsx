@@ -187,7 +187,7 @@ const Missao = () => {
                             placeholder={"Escolha o concorrente"}
                             options={(concorrentes || []).map(concorrente => {
                                 return {
-                                    label: concorrente.nome + ' ' + concorrente.tipo,
+                                    label: concorrente.nome + ' - Loja ' + concorrente.tipo,
                                     value: concorrente.id
                                 }
                             })}
@@ -196,15 +196,15 @@ const Missao = () => {
 
                     <Form.Item
                         label={"Produtos da missão"}
-                        extra={
-                            <Button 
-                                type="primary"
-                                shape="round"
-                                size="large"
-                                className="mt-4! w-full!">
-                                Importar produtos
-                            </Button>
-                        }
+                        // extra={
+                        //     <Button 
+                        //         type="primary"
+                        //         shape="round"
+                        //         size="large"
+                        //         className="mt-4! w-full!">
+                        //         Importar produtos
+                        //     </Button>
+                        // }
                         name="produtos"
                         rules={[{ required: true, message: "Selecione pelo menos um produto" }]}
                     >

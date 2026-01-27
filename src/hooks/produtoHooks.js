@@ -37,7 +37,11 @@ export const useImportarProduto = () => {
             const formData = new FormData();
             const file = dados.arquivo[0].originFileObj;
             formData.append("arquivo", file);
-            const response = await AXIOS.post('/produtos/importar', formData);
+            const response = await AXIOS.post('/produtos/importar', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
             return response.data;
         },
         onSuccess: () => {
