@@ -60,6 +60,20 @@ export const useEditarMissao = () => {
     });
 }
 
+export const useFinalizarMissao = () => {
+    return useMutation({
+        mutationFn: async (dados) => {
+            const response = await AXIOS.put(`/missao/${dados.id}`, dados);
+            return response.data;
+        },
+        onSuccess: () => {
+            QUERYCLIENT.invalidateQueries({
+                queryKey: ['missao']
+            })
+        }
+    });
+}
+
 export const useDeletarMissao = () => {
     return useMutation({
         mutationFn: async (id) => {

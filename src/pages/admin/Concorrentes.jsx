@@ -1,6 +1,6 @@
 import { Button, Drawer, Form, Image, Input, Popconfirm, Select, Table, Tag, Upload } from "antd";
 import { useContext, useState } from "react";
-import { LuLoader, LuUpload } from "react-icons/lu";
+import { LuPencil, LuTrash, LuUpload } from "react-icons/lu";
 import { useBuscarConcorrente, useCriarConcorrente, useDeletarConcorrente, useEditarConcorrente } from "../../hooks/concorrenteHooks";
 import { MainContext } from './../../contexts/MainContext';
 
@@ -66,13 +66,13 @@ const Concorrentes = () => {
 
     return (
         <div>
-            <div className="mb-6">
+            <div className="mb-6 lg:flex lg:justify-between lg:items-center">
                 <h2 className="font-bold text-xl text-azul mb-2">Concorrentes</h2>
                 <Button
                     type="primary"
                     shape="round"
                     size="large"
-                    className="w-full"
+                    className="w-full lg:w-auto lg:px-8!"
                     onClick={() => setVerCriar(true)}
                 >
                     Novo concorrente
@@ -83,8 +83,7 @@ const Concorrentes = () => {
                 dataSource={concorrentes || []}
                 rowKey={"id"}
                 loading={concorrentesFetching}
-                className="rounded-lg overflow-hidden shadow-xl"
-                // showHeader={false}
+                className="rounded-lg overflow-hidden shadow-xl lg:hidden"
             >
                 <Table.Column
                     title="Concorrente"
@@ -135,6 +134,81 @@ const Concorrentes = () => {
                                     <Button type="text">Deletar</Button>
                                 </Popconfirm>
                             </div>
+                        </div>
+                    )}
+                />
+            </Table>
+
+            <Table
+                dataSource={concorrentes || []}
+                rowKey={"id"}
+                loading={concorrentesFetching}
+                className="rounded-lg overflow-hidden shadow-xl hidden lg:block"
+            >
+                <Table.Column
+                    className="w-8"
+                    render={(_, linha) =>
+                        linha.foto ? (
+                            <Image src={linha.foto} className="w-12! h-12! rounded-full object-cover" />
+                        ) : (
+                            <div className="w-8 h-8 rounded-full bg-azul font-bold flex justify-center items-center text-white uppercase text-xs">
+                                {linha.nome.substring(0, 2)}
+                            </div>
+                        )
+                    }
+                />
+                <Table.Column
+                    title="Nome"
+                    render={(_, linha) => (
+                        <div>
+                            {linha.nome}
+                        </div>
+                    )}
+                />
+                <Table.Column
+                    title="Endereço"
+                    render={(_, linha) => (
+                        <div>
+                            {linha.endereco}
+                        </div>
+                    )}
+                />
+                <Table.Column
+                    className="w-25"
+                    title="Tipo"
+                    render={(_, linha) => (
+                        <div>
+                            Loja {linha.tipo}
+                        </div>
+                    )}
+                />
+                <Table.Column
+                    className="w-25"
+                    title="Ações"
+                    render={(_, linha) => (
+                        <div className="flex justify-end gap-4">
+                            <Button
+                                icon={<LuPencil />}
+                                type="primary"
+                                onClick={() => {
+                                    delete linha.foto;
+                                    setVerEditar(true);
+                                }}
+                            />
+                            <Popconfirm
+                                title="Aviso"
+                                description="Deseja apagar este item?"
+                                okText="Sim"
+                                cancelText="Não"
+                                onConfirm={() => {
+                                    deletar(linha.id)
+                                }}
+                            >
+                                <Button
+                                    icon={<LuTrash />}
+                                    type="primary"
+                                />
+                            </Popconfirm>
                         </div>
                     )}
                 />

@@ -1,6 +1,6 @@
 import { Button, Drawer, Form, Image, Input, Popconfirm, Select, Table, Tag, Upload } from "antd";
 import { useContext, useState } from "react";
-import { LuLoader, LuUpload } from "react-icons/lu";
+import { LuLoader, LuPencil, LuTrash, LuUpload } from "react-icons/lu";
 import { useBuscarUsuario, useCriarUsuario, useDeletarUsuario, useEditarUsuario } from "../../hooks/usuarioHooks";
 import { MainContext } from './../../contexts/MainContext';
 import { useBuscarNivel } from "../../hooks/nivelHooks";
@@ -10,7 +10,7 @@ const Usuarios = () => {
     const [verCriar, setVerCriar] = useState(false);
     const [verEditar, setVerEditar] = useState(false);
     const [formEditar] = Form.useForm();
-    const { data: niveis,  isFetched: niveisOk } = useBuscarNivel();
+    const { data: niveis, isFetched: niveisOk } = useBuscarNivel();
     const { data: usuarios, isFetching: usuariosFetching } = useBuscarUsuario();
     const { mutateAsync: criarUsuario } = useCriarUsuario();
     const { mutateAsync: editarUsuario } = useEditarUsuario();
@@ -66,13 +66,13 @@ const Usuarios = () => {
 
     return (
         <div>
-            <div className="mb-6">
+            <div className="mb-6 lg:flex lg:justify-between lg:items-center">
                 <h2 className="font-bold text-xl text-azul mb-2">Usuarios</h2>
                 <Button
                     type="primary"
                     shape="round"
                     size="large"
-                    className="w-full"
+                    className="w-full lg:w-auto lg:px-8!"
                     onClick={() => setVerCriar(true)}
                 >
                     Novo usuário
@@ -83,8 +83,7 @@ const Usuarios = () => {
                 dataSource={usuarios || []}
                 rowKey={"id"}
                 loading={usuariosFetching}
-                className="rounded-lg overflow-hidden shadow-xl"
-                // showHeader={false}
+                className="rounded-lg overflow-hidden shadow-xl lg:hidden"
             >
                 <Table.Column
                     title="Usuário"
@@ -135,6 +134,75 @@ const Usuarios = () => {
 
             </Table>
 
+            <Table
+                dataSource={usuarios || []}
+                rowKey={"id"}
+                loading={usuariosFetching}
+                className="rounded-lg overflow-hidden shadow-xl hidden lg:block"
+            >
+                <Table.Column
+                    className="w-8"
+                    render={(_, linha) =>
+                        linha.foto ? (
+                            <Image src={linha.foto} className="w-12! h-12! rounded-full object-cover" />
+                        ) : (
+                            <div className="w-8 h-8 rounded-full bg-azul font-bold flex justify-center items-center text-white uppercase text-xs">
+                                {linha.nome.substring(0, 2)}
+                            </div>
+                        )
+                    }
+                />
+                <Table.Column
+                    title="Nome"
+                    dataIndex={"nome"}
+                    key={"nome"}
+                />
+                <Table.Column
+                    title="Email"
+                    dataIndex={"email"}
+                    key={"email"}
+                />
+                <Table.Column
+                    className="w-25"
+                    title="Nível"
+                    render={(_, linha) => (
+                        <div>
+                            {linha.nivel.nome}
+                        </div>
+                    )}
+                />
+                <Table.Column
+                    className="w-25"
+                    title="Ações"
+                    render={(_, linha) => (
+                        <div className="flex justify-end gap-4">
+                            <Button
+                                icon={<LuPencil />}
+                                type="primary"
+                                onClick={() => {
+                                    delete linha.foto;
+                                    setVerEditar(true);
+                                }}
+                            />
+                            <Popconfirm
+                                title="Aviso"
+                                description="Deseja apagar este item?"
+                                okText="Sim"
+                                cancelText="Não"
+                                onConfirm={() => {
+                                    deletar(linha.id)
+                                }}
+                            >
+                                <Button
+                                    icon={<LuTrash />}
+                                    type="primary"
+                                />
+                            </Popconfirm>
+                        </div>
+                    )}
+                />
+            </Table>
+
             <Drawer
                 title="Criar"
                 open={verCriar}
@@ -171,7 +239,7 @@ const Usuarios = () => {
                         name={'nivelId'}
                         rules={[{ required: true, message: 'Campo obrigatório' }]}
                     >
-                        <Select 
+                        <Select
                             placeholder={"Escolha o nível"}
                             options={(niveis || []).map(nivel => {
                                 return {
@@ -255,7 +323,7 @@ const Usuarios = () => {
                         name={'nivelId'}
                         rules={[{ required: true, message: 'Campo obrigatório' }]}
                     >
-                        <Select 
+                        <Select
                             placeholder={"Escolha o nível"}
                             options={(niveis || []).map(nivel => {
                                 return {

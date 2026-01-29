@@ -1,6 +1,6 @@
 import { Button, Drawer, Form, Image, Input, InputNumber, Popconfirm, Table, Tag, Upload } from "antd";
 import { useContext, useState } from "react";
-import { LuImage, LuUpload } from "react-icons/lu";
+import { LuImage, LuPencil, LuTrash, LuUpload } from "react-icons/lu";
 import { useBuscarProduto, useCriarProduto, useDeletarProduto, useEditarProduto, useImportarProduto } from "../../hooks/produtoHooks";
 import { MainContext } from './../../contexts/MainContext';
 import * as XLSX from 'xlsx';
@@ -94,7 +94,7 @@ const Produtos = () => {
                     description: response.description
                 });
             },
-            onError: ({response}) => {
+            onError: ({ response }) => {
                 api[response.data.type]({
                     description: response.data.description
                 });
@@ -154,14 +154,14 @@ const Produtos = () => {
 
     return (
         <div>
-            <div className="mb-6">
+            <div className="mb-6 lg:flex lg:justify-between lg:items-center">
                 <h2 className="font-bold text-xl text-azul mb-2">Produtos</h2>
                 <div className="flex gap-4">
                     <Button
                         type="primary"
                         shape="round"
                         size="large"
-                        className="w-full"
+                        className="w-full lg:w-auto lg:px-8!"
                         onClick={() => setVerImportar(true)}
                     >
                         Importar produtos
@@ -170,7 +170,7 @@ const Produtos = () => {
                         type="primary"
                         shape="round"
                         size="large"
-                        className="w-full"
+                        className="w-full lg:w-auto lg:px-8!"
                         onClick={() => setVerCriar(true)}
                     >
                         Novo produto
@@ -182,7 +182,7 @@ const Produtos = () => {
                 dataSource={produtos || []}
                 rowKey={"id"}
                 loading={produtosFetching}
-                className="rounded-lg overflow-hidden shadow-xl"
+                className="rounded-lg overflow-hidden shadow-xl lg:hidden"
             >
                 <Table.Column
                     title="Produto"
@@ -226,6 +226,74 @@ const Produtos = () => {
                                     <Button type="text">Deletar</Button>
                                 </Popconfirm>
                             </div>
+                        </div>
+                    )}
+                />
+            </Table>
+
+            <Table
+                dataSource={produtos || []}
+                rowKey={"id"}
+                loading={produtosFetching}
+                className="rounded-lg overflow-hidden shadow-xl hidden lg:block"
+            >
+                <Table.Column
+                    className="w-8"
+                    render={(_, linha) =>
+                        linha.foto ? (
+                            <Image src={linha.foto} className="w-12! h-12! rounded-full object-cover" />
+                        ) : (
+                            <div className="w-8 h-8 rounded-full bg-azul font-bold flex justify-center items-center text-white uppercase text-xs">
+                                {linha.nome.substring(0, 2)}
+                            </div>
+                        )
+                    }
+                />
+                <Table.Column
+                    title="Nome"
+                    dataIndex={"nome"}
+                    key={"nome"}
+                />
+                <Table.Column
+                    title="Preço base"
+                    render={(_, linha) => `R$ ${linha.preco.toFixed(2)}`}
+                />
+                <Table.Column
+                    title="Código"
+                    dataIndex={"codigo"}
+                    key={"codigo"}
+                />
+                <Table.Column
+                    className="w-25"
+                    title="Ações"
+                    render={(_, linha) => (
+                        <div className="flex justify-end gap-4">
+                            <Button
+                                icon={<LuPencil />}
+                                type="primary"
+                                onClick={() => {
+                                    delete linha.foto;
+                                    formEditar.setFieldsValue({
+                                        ...linha,
+                                        produtos: linha.produtos.map(p => p.produtoId)
+                                    })
+                                    setVerEditar(true);
+                                }}
+                            />
+                            <Popconfirm
+                                title="Aviso"
+                                description="Deseja apagar este item?"
+                                okText="Sim"
+                                cancelText="Não"
+                                onConfirm={() => {
+                                    deletar(linha.id)
+                                }}
+                            >
+                                <Button
+                                    icon={<LuTrash />}
+                                    type="primary"
+                                />
+                            </Popconfirm>
                         </div>
                     )}
                 />

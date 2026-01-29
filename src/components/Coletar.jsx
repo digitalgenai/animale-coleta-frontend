@@ -1,23 +1,26 @@
-import { Button, Drawer, Form, Image, Input, InputNumber, Space, Tag, Upload } from "antd";
+import { Button, Drawer, Form, Image, Input, InputNumber, Modal, Space, Tag, Upload } from "antd";
 import { LuArrowLeft, LuCamera, LuImage, LuLoader, LuMapPin, LuMessageCircle } from "react-icons/lu";
 import { Link, useParams } from "react-router";
 import Coleta from "./Coleta";
 import { useContext, useState } from "react";
-import { useBuscarUmaMissao, useEditarColeta } from "../hooks/missaoHooks";
+import { useBuscarUmaMissao, useEditarColeta, useEditarMissao, useFinalizarMissao } from "../hooks/missaoHooks";
 import { MainContext } from "../contexts/MainContext";
 import LeitorCodigoBarras from "./LeitorCodigoBarras";
 
 const Coletar = () => {
 
     const [verColeta, setVerColeta] = useState(false);
+    const [verModal, setVerModal] = useState(false);
+    const [textModal, setTextModal] = useState("Ainda existem produtos sem coleta, deseja finalizar assim mesmo?");
     const [produto, setProduto] = useState(null);
     const [lerCodigo, setLerCodigo] = useState(false);
 
     const [formEditar] = Form.useForm();
     const { id } = useParams();
+    const { api } = useContext(MainContext);
     const { data: missao, isFetched: missaoOk, refetch: missaoRefetch } = useBuscarUmaMissao(id);
     const { mutateAsync: editarColeta } = useEditarColeta();
-    const { api } = useContext(MainContext);
+    const { mutateAsync: finalizarMissao, isPending: finalizarMissaoPending } = useFinalizarMissao();
 
     function editar(dados) {
         editarColeta(dados, {
@@ -37,6 +40,22 @@ const Coletar = () => {
         setVerColeta(false);
     }
 
+    function finalizar() {
+        setTextModal("Aguarde...");
+        finalizarMissao({ id: missao.id, status: "concluído" }, {
+            onSuccess: (response) => {
+                api[response.type]({
+                    description: response.description
+                });
+            },
+            onError: (response) => {
+                api[response.type]({
+                    description: response.description
+                });
+            },
+        });
+        setVerModal(false);
+    }
     return (
         <div className="p-4 bg-stone-100 h-dvh overflow-auto">
             <Link
@@ -47,8 +66,8 @@ const Coletar = () => {
             </Link>
             {
                 missaoOk ? (
-                    <>
-                        <div className="bg-white p-4 rounded-xl shadow-lg">
+                    <div className="lg:flex lg:gap-4 lg:items-start">
+                        <div className="bg-white p-4 rounded-xl shadow-lg lg:w-100">
                             <div className="flex gap-4 items-start">
                                 {
                                     missao.concorrente.foto ? (
@@ -82,13 +101,34 @@ const Coletar = () => {
                                     {missao.titulo ? missao.titulo : 'Nenhuma'}
                                 </div>
                             </div>
+                            <Button
+                                className="mt-4 w-full"
+                                type="primary"
+                                size="large"
+                                disabled={missao.status == "concluído"}
+                                onClick={() => {
+                                    if (missao.produtos.some(produto => produto.status == null)) {
+                                        setVerModal(true);
+                                    } else {
+                                        finalizar();
+                                    }
+                                }}
+                            >
+                                Finalizar Missão
+                            </Button>
                         </div>
-                        <div className="mt-4 flex flex-col gap-2">
+                        <div className="mt-4 lg:mt-0 flex flex-col gap-2 lg:gap-4 lg:flex-1">
                             {
                                 missao.produtos.map(p => (
                                     <div
                                         key={p.id}
                                         onClick={() => {
+                                            if(missao.status == "concluído"){
+                                                api.info({
+                                                    description: "Esta missão já foi encerrada."
+                                                })
+                                                return
+                                            }
                                             setProduto({ id: p.id, foto: p.foto });
                                             formEditar.setFieldsValue({
                                                 id: p.id,
@@ -109,13 +149,25 @@ const Coletar = () => {
                                 ))
                             }
                         </div>
-                    </>
+                    </div>
                 ) : (
                     <div className="flex justify-center">
                         <LuLoader className="animate-spin" size={36} />
                     </div>
                 )
             }
+
+            <Modal
+                title="Aviso:"
+                open={verModal}
+                onOk={finalizar}
+                onClose={() => setVerModal(false)}
+                onCancel={() => setVerModal(false)}
+                confirmLoading={finalizarMissaoPending}
+            >
+                <p>{textModal}</p>
+            </Modal>
+
             <Drawer
                 open={verColeta}
                 onClose={() => {
@@ -209,6 +261,7 @@ const Coletar = () => {
                     </div>
                 </Form>
             </Drawer>
+
             <Drawer
                 open={lerCodigo}
                 onClose={() => setLerCodigo(false)}

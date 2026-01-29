@@ -1,6 +1,6 @@
 import { Button, Drawer, Form, Image, Input, Popconfirm, Select, Table, Tag, Upload } from "antd";
 import { useContext, useState } from "react";
-import { LuMap, LuMapPin, LuMessageCircle, LuPin, LuShoppingCart, LuUpload } from "react-icons/lu";
+import { LuMap, LuMapPin, LuMessageCircle, LuPencil, LuPin, LuShoppingCart, LuTrash, LuUpload } from "react-icons/lu";
 import { useBuscarMissao, useCriarMissao, useDeletarMissao, useEditarMissao } from "../../hooks/missaoHooks";
 import { MainContext } from './../../contexts/MainContext';
 import { useBuscarConcorrente } from './../../hooks/concorrenteHooks';
@@ -70,13 +70,13 @@ const Missao = () => {
 
     return (
         <div>
-            <div className="mb-6">
+            <div className="mb-6 lg:flex lg:justify-between lg:items-center">
                 <h2 className="font-bold text-xl text-azul mb-2">Missões</h2>
                 <Button
                     type="primary"
                     shape="round"
                     size="large"
-                    className="w-full"
+                    className="w-full lg:w-auto lg:px-8!"
                     onClick={() => setVerCriar(true)}
                 >
                     Nova missão
@@ -87,8 +87,7 @@ const Missao = () => {
                 dataSource={missao || []}
                 rowKey={"id"}
                 loading={missaoFetching}
-                className="rounded-lg overflow-hidden shadow-xl"
-            // showHeader={false}
+                className="rounded-lg overflow-hidden shadow-xl lg:hidden"
             >
                 <Table.Column
                     title="Missão"
@@ -162,6 +161,103 @@ const Missao = () => {
                                     <Button type="text">Deletar</Button>
                                 </Popconfirm>
                             </div>
+                        </div>
+                    )}
+                />
+            </Table>
+
+            <Table
+                dataSource={missao || []}
+                rowKey={"id"}
+                loading={missaoFetching}
+                className="rounded-lg overflow-hidden shadow-xl hidden lg:block"
+            >
+                <Table.Column
+                    className="w-8"
+                    render={(_, linha) =>
+                        linha.concorrente.foto ? (
+                            <Image src={linha.concorrente.foto} className="w-12! h-12! rounded-full object-cover" />
+                        ) : (
+                            <div className="w-8 h-8 rounded-full bg-azul font-bold flex justify-center items-center text-white uppercase text-xs">
+                                {linha.concorrente.nome.substring(0, 2)}
+                            </div>
+                        )
+                    }
+                />
+                <Table.Column
+                    title="Nome"
+                    render={(_, linha) => (
+                        <div>
+                            {linha.concorrente.nome}
+                        </div>
+                    )}
+                />
+                <Table.Column
+                    title="Endereço"
+                    render={(_, linha) => (
+                        <div>
+                            {linha.concorrente.endereco}
+                        </div>
+                    )}
+                />
+                <Table.Column
+                    className="w-25"
+                    title="Tipo"
+                    render={(_, linha) => (
+                        <div>
+                            Loja {linha.concorrente.tipo}
+                        </div>
+                    )}
+                />
+                <Table.Column
+                    className="w-25"
+                    title="Itens"
+                    render={(_, linha) => (
+                        <div>
+                            {linha.produtos.length} Produtos
+                        </div>
+                    )}
+                />
+                <Table.Column
+                    className="w-25"
+                    title="Status"
+                    render={(_, linha) => (
+                        <div className={`font-bold uppercase text-xs ${linha.status == "pendente" ? "text-red-600" : "text-green-600"}`}>
+                            {linha.status}
+                        </div>
+                    )}
+                />
+                <Table.Column
+                    className="w-25"
+                    title="Ações"
+                    render={(_, linha) => (
+                        <div className="flex justify-end gap-4">
+                            <Button
+                                icon={<LuPencil />}
+                                type="primary"
+                                onClick={() => {
+                                    delete linha.foto;
+                                    formEditar.setFieldsValue({
+                                        ...linha,
+                                        produtos: linha.produtos.map(p => p.produtoId)
+                                    })
+                                    setVerEditar(true);
+                                }}
+                            />
+                            <Popconfirm
+                                title="Aviso"
+                                description="Deseja apagar este item?"
+                                okText="Sim"
+                                cancelText="Não"
+                                onConfirm={() => {
+                                    deletar(linha.id)
+                                }}
+                            >
+                                <Button
+                                    icon={<LuTrash />}
+                                    type="primary"
+                                />
+                            </Popconfirm>
                         </div>
                     )}
                 />

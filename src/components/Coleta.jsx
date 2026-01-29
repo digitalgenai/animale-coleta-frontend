@@ -14,7 +14,7 @@ const Coleta = ({ nome, preco, foto, precoConcorrente, status, updatedAt, shadow
     }
 
     return (
-        <div className={`bg-white rounded-xl ${shadow && 'shadow-lg p-3'} flex items-center`}>
+        <div className={`bg-white rounded-xl ${shadow && 'shadow-lg p-3'} flex items-center cursor-pointer hover:scale-101 duration-200`}>
             {
                 foto ? (
                     <Image src={foto} className="w-12.5! h-12.5! object-cover" />
@@ -25,16 +25,18 @@ const Coleta = ({ nome, preco, foto, precoConcorrente, status, updatedAt, shadow
                 )
             }
             <div className="leading-4 pl-3 flex-1">
-                <h5 className="text-lg line-clamp-1">{nome}</h5>
-                <h6 className="text-xs">Preço base: R$ {Number(preco).toFixed(2)}</h6>
-                {
-                    !precoConcorrente && status ? (
-                        <h6 className="text-xs">{status}</h6>
-                    ) : (
-                        <h6 className="text-xs">Preço coletado : R$ {Number(precoConcorrente).toFixed(2)}</h6>
-                    )
-                }
-                <h6 className="text-xs">Data da coleta: {updatedAt?.split("T")[0].split("-").reverse().join("/")}</h6>
+                <h5 className="text-lg lg:text-sm line-clamp-1">{nome}</h5>
+                <div className="lg:flex lg:gap-6">
+                    <h6 className="text-xs">Preço base: <strong>R$ {Number(preco).toFixed(2)}</strong></h6>
+                    {
+                        !precoConcorrente && status ? (
+                            <h6 className="text-xs">{status}</h6>
+                        ) : (
+                            <h6 className="text-xs">Preço coletado : <strong>R$ {Number(precoConcorrente).toFixed(2)}</strong></h6>
+                        )
+                    }
+                    <h6 className="text-xs">Data da coleta: <strong>{updatedAt?.split("T")[0].split("-").reverse().join("/")}</strong></h6>
+                </div>
             </div>
             {percent(Number(preco), Number(precoConcorrente))}
         </div >

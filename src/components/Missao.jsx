@@ -1,4 +1,4 @@
-import { Image, Tag  } from "antd";
+import { Image, Tag } from "antd";
 import { LuMapPin, LuShoppingCart } from "react-icons/lu";
 import { Link } from "react-router";
 
@@ -8,11 +8,18 @@ const Missao = ({ id, concorrente, produtos, titulo, criadaEm }) => {
             to={`/admin/coletar/${id}`}
             className="text-black!"
         >
-            <div className="bg-white p-4 pt-6 rounded-xl shadow-lg">
+            <div className="bg-white p-4 pt-6 rounded-xl shadow-lg cursor-pointer hover:scale-101 duration-200">
                 <div className="flex flex-col gap-4 items-center">
                     {
                         concorrente.foto ? (
-                            <Image src={concorrente.foto} className="w-18! h-18! rounded-full object-cover" />
+                            <Image
+                                src={concorrente.foto}
+                                className="w-18! h-18! rounded-full object-cover"
+                                onError={(e) => {
+                                    e.currentTarget.src =
+                                        'https://media.istockphoto.com/id/931643150/vector/picture-icon.jpg?s=612x612&w=0&k=20&c=St-gpRn58eIa8EDAHpn_yO4CZZAnGD6wKpln9l3Z3Ok='
+                                }}
+                            />
                         ) : (
                             <div className="w-18 h-18 rounded-full bg-azul font-bold flex justify-center items-center text-white uppercase">
                                 {concorrente.nome.substring(0, 2)}
@@ -20,8 +27,8 @@ const Missao = ({ id, concorrente, produtos, titulo, criadaEm }) => {
                         )
                     }
                     <div className="flex-1 flex flex-col  lg:justify-between h-10 items-center">
-                        <div className="text-xl line-clamp-1">{concorrente.nome}</div>
                         <Tag color={concorrente.tipo == 'Online' ? '#EB9A00' : '#002855'} variant="outlined">Loja {concorrente.tipo}</Tag>
+                        <div className="text-xl line-clamp-1">{concorrente.nome}</div>
                     </div>
                 </div>
                 <div className="flex gap-4 items-center mt-4">
