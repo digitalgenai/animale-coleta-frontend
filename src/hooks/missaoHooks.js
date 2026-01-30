@@ -22,11 +22,21 @@ export const useBuscarUmaMissao = (id) => {
     });
 }
 
-export const useBuscarUlmimasMissao = () => {
+export const useBuscarMissaoPendente = () => {
     return useQuery({
-        queryKey: ['missao'],
+        queryKey: ['missaoPendente'],
         queryFn: async (dados) => {
             const response = await AXIOS.get('/missao?qtd=4&status=pendente', dados);
+            return response.data;
+        }
+    });
+}
+
+export const useBuscarMissaoConcluida = () => {
+    return useQuery({
+        queryKey: ['missaoConcluida'],
+        queryFn: async (dados) => {
+            const response = await AXIOS.get('/missao?qtd=4&status=concluído', dados);
             return response.data;
         }
     });

@@ -1,14 +1,14 @@
 import { Button } from "antd";
 import Missao from "../../components/Missao";
 import Coleta from "../../components/Coleta";
-import { useBuscarUlmimasMissao, useBuscarUltimasColetas } from "../../hooks/missaoHooks";
+import { useBuscarMissaoConcluida, useBuscarMissaoPendente, useBuscarUltimasColetas } from "../../hooks/missaoHooks";
 import { LuLoader } from "react-icons/lu";
 import { useNavigate } from "react-router";
 
 const Painel = () => {
 
-    const { data: missoes, isFetched: missoesOk } = useBuscarUlmimasMissao();
-    const { data: coletas, isFetched: coletasOk } = useBuscarUltimasColetas();
+    const { data: missoes, isFetched: missoesOk } = useBuscarMissaoPendente();
+    const { data: missoesConcluida, isFetched: missoesConcluidaOk } = useBuscarMissaoConcluida();
     const navigate = useNavigate();
 
     return (
@@ -21,7 +21,7 @@ const Painel = () => {
                         shape="round"
                         size="large"
                         className="w-37.5"
-                        onClick={() => navigate("/admin/missoes-pendentes")}
+                        onClick={() => navigate("/admin/missoes")}
                     >
                         Ver Todas
                     </Button>
@@ -29,13 +29,13 @@ const Painel = () => {
             </div>
             <div className="mt-4">
                 {
-                    missoesOk ?  (
+                    missoesOk ? (
                         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                             {
                                 missoes.length > 0 ? missoes.map(missao => (
                                     <Missao
                                         key={missao.id}
-                                        { ...missao }
+                                        {...missao}
                                     />
                                 )) : (
                                     <div className="flex justify-center">
@@ -63,21 +63,33 @@ const Painel = () => {
                 </Button>
             </div>
 
-            <h6 className="text-lg font-bold text-azul mb-4 mt-6">Últimas coletas</h6>
+            <div className="mb-4 flex justify-between items-center">
+                <h6 className="text-lg font-bold text-azul mb-4 mt-6">Últimas coletas</h6>
+                {/* <div className="hidden lg:block">
+                    <Button
+                        type="primary"
+                        shape="round"
+                        size="large"
+                        className="w-37.5"
+                        onClick={() => navigate("/admin/missoes-pendentes")}
+                    >
+                        Ver Todas
+                    </Button>
+                </div> */}
+            </div>
             <div className="flex flex-col gap-3">
                 {
-                    coletasOk ?  (
-                        <div className="grid gap-2">
+                    missoesConcluidaOk ? (
+                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                             {
-                                coletas.length > 0 ? coletas.map(coleta => (
-                                    <Coleta
-                                        key={coleta.id}
-                                        { ...coleta.produto }
-                                        precoConcorrente={coleta.precoConcorrente}
+                                missoes.length > 0 ? missoesConcluida.map(missao => (
+                                    <Missao
+                                        key={missao.id}
+                                        {...missao}
                                     />
                                 )) : (
                                     <div className="flex justify-center">
-                                        Nenhuma coleta encontrada
+                                        Nenhuma missão encontrada
                                     </div>
                                 )
                             }
@@ -89,7 +101,7 @@ const Painel = () => {
                     )
                 }
             </div>
-            <div className="flex justify-center mt-6">
+            {/* <div className="flex justify-center mt-6">
                 <Button
                     type="primary"
                     shape="round"
@@ -99,7 +111,7 @@ const Painel = () => {
                 >
                     Ver Todas
                 </Button>
-            </div>
+            </div> */}
         </div>
     );
 }
