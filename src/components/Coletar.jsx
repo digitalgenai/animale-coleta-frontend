@@ -22,6 +22,7 @@ const Coletar = () => {
     const { data: missao, isFetched: missaoOk, refetch: missaoRefetch } = useBuscarUmaMissao(id);
     const { mutateAsync: editarColeta } = useEditarColeta();
     const { mutateAsync: finalizarMissao, isPending: finalizarMissaoPending } = useFinalizarMissao();
+    const codigo = Form.useWatch('codigo',formEditar);
 
     function editar(dados) {
         editarColeta({ ...dados, status: 'concluído' }, {
@@ -289,15 +290,17 @@ const Coletar = () => {
                         label="Código de barra"
                         name="codigo"
                     >
-                        <Space.Compact className="w-full">
-                            <Input />
-                            <Button
-                                size="large"
-                                icon={<LuCamera />}
-                                onClick={() => setLerCodigo(true)}
-                            />
-                        </Space.Compact>
+                        <Input />
                     </Form.Item>
+                    {codigo}
+                    <Button
+                        size="large"
+                        // icon={<LuCamera />}
+                        type="primary"
+                        className="w-full! mb-4"
+                        shape="round"
+                        onClick={() => setLerCodigo(true)}
+                    >Escanear barra</Button>
                     <Form.Item
                         label="Observação"
                         name="observacao"
