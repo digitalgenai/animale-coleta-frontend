@@ -292,7 +292,7 @@ const Coletar = () => {
                     >
                         <Input />
                     </Form.Item>
-                    {codigo}
+                    {/* {codigo} */}
                     <Button
                         size="large"
                         // icon={<LuCamera />}
