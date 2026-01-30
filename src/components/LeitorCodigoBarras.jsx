@@ -3,39 +3,45 @@ import { Button } from "antd";
 import { LuX } from "react-icons/lu";
 
 const LeitorCodigoBarras = ({ onScan, onClose }) => {
-  return (
-    <div className="flex flex-col gap-4 h-full">
-      {/* Scanner */}
-      <div className="flex-1 rounded-xl overflow-hidden bg-black">
-        <Scanner
-          constraints={{ facingMode: "environment" }} // câmera traseira
-          onScan={(result) => {
-            if (!result || result.length === 0) return;
+    return (
+        <div className="flex flex-col gap-4 h-full">
+            {/* Scanner */}
+            <div className="flex-1 rounded-xl overflow-hidden bg-black">
+                <Scanner
+                    constraints={{ facingMode: "environment" }} // câmera traseira
+                    onScan={(result) => {
+                        if (!result) return;
 
-            // pega o valor lido
-            const codigo = result[0].rawValue;
+                        // quando vier array
+                        if (Array.isArray(result)) {
+                            const codigo = result[0]?.rawValue || result[0]?.value;
+                            if (codigo) onScan(codigo);
+                            return;
+                        }
 
-            if (codigo) {
-              onScan(codigo);
-            }
-          }}
-          onError={(error) => {
-            console.error("Erro ao ler código:", error);
-          }}
-        />
-      </div>
+                        // quando vier objeto
+                        const codigo = result.rawValue || result.value;
+                        if (codigo) {
+                            onScan(codigo);
+                        }
+                    }}
+                    onError={(error) => {
+                        console.error("Erro ao ler código:", error);
+                    }}
+                />
+            </div>
 
-      {/* Botão fechar */}
-      <Button
-        type="primary"
-        size="large"
-        icon={<LuX />}
-        onClick={onClose}
-      >
-        Fechar
-      </Button>
-    </div>
-  );
+            {/* Botão fechar */}
+            <Button
+                type="primary"
+                size="large"
+                icon={<LuX />}
+                onClick={onClose}
+            >
+                Fechar
+            </Button>
+        </div>
+    );
 };
 
 export default LeitorCodigoBarras;
