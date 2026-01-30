@@ -1,10 +1,12 @@
 import { Button, Drawer, Form, Image, Input, Popconfirm, Select, Table, Tag, Upload } from "antd";
 import { useContext, useState } from "react";
-import { LuMap, LuMapPin, LuMessageCircle, LuPencil, LuPin, LuShoppingCart, LuTrash, LuUpload } from "react-icons/lu";
+import { LuFileDown, LuMapPin, LuMessageCircle, LuPencil, LuShoppingCart, LuTrash, LuUpload } from "react-icons/lu";
 import { useBuscarMissao, useCriarMissao, useDeletarMissao, useEditarMissao } from "../../hooks/missaoHooks";
 import { MainContext } from './../../contexts/MainContext';
 import { useBuscarConcorrente } from './../../hooks/concorrenteHooks';
 import { useBuscarProduto } from "../../hooks/produtoHooks";
+import img from "../../assets/img-error.png"
+import * as XLSX from 'xlsx';
 
 const Missao = () => {
 
@@ -19,22 +21,25 @@ const Missao = () => {
     const { mutateAsync: editarMissao } = useEditarMissao();
     const { mutateAsync: deletarMissao } = useDeletarMissao();
     const { api } = useContext(MainContext);
+    const colunasEsperadas = ['codigo', 'nome', 'preco'];
 
     function criar(dados) {
         criarMissao(dados, {
             onSuccess: (response) => {
                 api[response.type]({
-                    description: response.description
+                    description: response.description,
+                    onClose: () => setVerCriar(false)
                 });
             },
-            onError: (response) => {
-                api[response.type]({
-                    description: response.description
+            onError: ({response}) => {
+                api[response.data.type]({
+                    description: response.data.description,
+                    onClose: () => setVerCriar(false)
                 });
             },
         });
         formCriar.resetFields();
-        setVerCriar(false);
+        
     }
 
     function editar(dados) {
@@ -68,6 +73,101 @@ const Missao = () => {
         });
     }
 
+    function gerarCSV(missao) {
+        const concorrente = missao.concorrente;
+        const data = new Date(missao.updatedAt).toLocaleDateString("pt-BR");
+
+        let csv = "";
+        csv += `Concorrente: ${concorrente.nome}; Tipo: Loja ${concorrente.tipo}; Data: ${data}\n`;
+        csv += "Código;Código Concorrente;Nome;Preço Base;Preço Concorrente;Preço Desconto;Observação\n";
+
+        missao.produtos.forEach(produtoItem => {
+            const codigo = produtoItem.produto.codigo ?? "";
+            const codigoConcorrente = produtoItem.codigo ?? "";
+            const nome = produtoItem.produto.nome ?? "";
+            const precoBase = produtoItem.produto.preco ?? "";
+            const precoConcorrente = produtoItem.precoConcorrente ?? "";
+            const precoDesconto = produtoItem.precoConcorrentePromocao ?? "";
+            const observacao = produtoItem.observacao ?? "";
+            csv += `${codigo};${codigoConcorrente};${nome};${precoBase};${precoConcorrente};${precoDesconto};${observacao}\n`;
+        });
+
+        const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = `${concorrente.nome.trim()}_Loja-${concorrente.tipo}_${data}.csv`;
+        link.click();
+
+        URL.revokeObjectURL(url);
+    }
+
+    const validarArquivo = (file) => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+
+            reader.onload = (e) => {
+                const data = new Uint8Array(e.target.result);
+                const workbook = XLSX.read(data, { type: 'array' });
+
+                const sheetName = workbook.SheetNames[0];
+                const worksheet = workbook.Sheets[sheetName];
+
+                const rows = XLSX.utils.sheet_to_json(worksheet, {
+                    header: 1,
+                    defval: '',
+                    blankrows: false
+                });
+
+                if (!rows.length) {
+                    return reject('Arquivo vazio.');
+                }
+
+                const header = rows[0]
+                    .map(col => String(col).trim().toLowerCase());
+
+                const ordemCorreta =
+                    header.length === colunasEsperadas.length &&
+                    header.every((col, index) => col === colunasEsperadas[index]);
+
+                if (!ordemCorreta) {
+                    return reject(
+                        'O cabeçalho deve ser exatamente: codigo, nome, preco.'
+                    );
+                }
+
+                for (let i = 1; i < rows.length; i++) {
+                    const [codigo, nome, preco] = rows[i];
+
+                    const linhaVazia =
+                        !codigo && !nome && !preco;
+
+                    if (linhaVazia) {
+                        return reject(
+                            `Linha ${i + 1} está vazia.`
+                        );
+                    }
+
+                    if (!codigo || !nome || preco === '') {
+                        return reject(
+                            `Linha ${i + 1} possui campos obrigatórios vazios.`
+                        );
+                    }
+
+                    if (isNaN(Number(preco))) {
+                        return reject(
+                            `Linha ${i + 1}: o campo "preco" deve ser numérico.`
+                        );
+                    }
+                }
+                resolve();
+            };
+
+            reader.readAsArrayBuffer(file);
+        });
+    };
+
     return (
         <div>
             <div className="mb-6 lg:flex lg:justify-between lg:items-center">
@@ -96,7 +196,13 @@ const Missao = () => {
                             <div className="flex gap-4 items-start">
                                 {
                                     linha.concorrente.foto ? (
-                                        <Image src={linha.concorrente.foto} className="w-12! h-12! rounded-full object-cover" />
+                                        <Image
+                                            src={linha.concorrente.foto}
+                                            className="w-12! h-12! rounded-full object-cover"
+                                            onError={(e) => {
+                                                e.currentTarget.src = img
+                                            }}
+                                        />
                                     ) : (
                                         <div className="w-12 h-12 rounded-full bg-azul font-bold flex justify-center items-center text-white uppercase">
                                             {linha.concorrente.nome.substring(0, 2)}
@@ -176,7 +282,15 @@ const Missao = () => {
                     className="w-8"
                     render={(_, linha) =>
                         linha.concorrente.foto ? (
-                            <Image src={linha.concorrente.foto} className="w-12! h-12! rounded-full object-cover" />
+                            <div className="w-8 h-8">
+                                <Image
+                                    src={linha.concorrente.foto}
+                                    className="w-8! h-8! rounded-full object-cover"
+                                    onError={(e) => {
+                                        e.currentTarget.src = img
+                                    }}
+                                />
+                            </div>
                         ) : (
                             <div className="w-8 h-8 rounded-full bg-azul font-bold flex justify-center items-center text-white uppercase text-xs">
                                 {linha.concorrente.nome.substring(0, 2)}
@@ -201,7 +315,7 @@ const Missao = () => {
                     )}
                 />
                 <Table.Column
-                    className="w-25"
+                    className="w-30"
                     title="Tipo"
                     render={(_, linha) => (
                         <div>
@@ -232,6 +346,14 @@ const Missao = () => {
                     title="Ações"
                     render={(_, linha) => (
                         <div className="flex justify-end gap-4">
+                            <Button
+                                icon={<LuFileDown />}
+                                type="primary"
+                                disabled={linha.status != 'concluído'}
+                                onClick={() => {
+                                    gerarCSV(linha)
+                                }}
+                            />
                             <Button
                                 icon={<LuPencil />}
                                 type="primary"
@@ -290,17 +412,8 @@ const Missao = () => {
                         />
                     </Form.Item>
 
-                    <Form.Item
+                    {/* <Form.Item
                         label={"Produtos da missão"}
-                        // extra={
-                        //     <Button 
-                        //         type="primary"
-                        //         shape="round"
-                        //         size="large"
-                        //         className="mt-4! w-full!">
-                        //         Importar produtos
-                        //     </Button>
-                        // }
                         name="produtos"
                         rules={[{ required: true, message: "Selecione pelo menos um produto" }]}
                     >
@@ -316,6 +429,38 @@ const Missao = () => {
                                 }
                             })}
                         />
+                    </Form.Item> */}
+
+                    <Form.Item
+                        label="Arquivo"
+                        name={'arquivo'}
+                        valuePropName="file"
+                        getValueFromEvent={(e) => e.file}
+                        // valuePropName="fileList"
+                        // getValueFromEvent={(e) => {
+                        //     if (Array.isArray(e)) return e;
+                        //     return e?.fileList;
+                        // }}
+                        rules={[{ required: true, message: 'Campo obrigatório' }]}
+                    >
+                        <Upload
+                            accept=".xls,.xlsx,.csv"
+                            maxCount={1}
+                            beforeUpload={async (file) => {
+                                try {
+                                    await validarArquivo(file);
+                                    api.success({ description: 'Arquivo válido!' });
+                                    return false;
+                                } catch (erro) {
+                                    api.error({ description: erro });
+                                    return Upload.LIST_IGNORE;
+                                }
+                            }}
+                        >
+                            <Button type="primary">
+                                <LuUpload /> Carregar lista de produtos
+                            </Button>
+                        </Upload>
                     </Form.Item>
 
                     <Form.Item

@@ -1,7 +1,7 @@
 import { Image } from "antd";
 import { LuImage } from "react-icons/lu";
 
-const Coleta = ({ nome, preco, foto, precoConcorrente, status, updatedAt, shadow = true }) => {
+const Coleta = ({ nome, preco, foto, precoConcorrente, precoConcorrentePromocao, status, createdAt, updatedAt, shadow = true }) => {
 
     function percent(p, pc) {
         if (pc == 0) { return <div className="text-stone-500 font-bold text-lg pl-2">0%</div> }
@@ -32,10 +32,13 @@ const Coleta = ({ nome, preco, foto, precoConcorrente, status, updatedAt, shadow
                         !precoConcorrente && status ? (
                             <h6 className="text-xs">{status}</h6>
                         ) : (
-                            <h6 className="text-xs">Preço coletado : <strong>R$ {Number(precoConcorrente).toFixed(2)}</strong></h6>
+                            <>
+                                <h6 className="text-xs">Preço cheio : <strong>R$ {Number(precoConcorrente).toFixed(2)}</strong></h6>
+                                <h6 className="text-xs">Preço promoção : <strong>R$ {Number(precoConcorrentePromocao).toFixed(2)}</strong></h6>
+                            </>
                         )
                     }
-                    <h6 className="text-xs">Data da coleta: <strong>{updatedAt?.split("T")[0].split("-").reverse().join("/")}</strong></h6>
+                    <h6 className="text-xs">Data da coleta: <strong>{ createdAt != updatedAt && updatedAt?.split("T")[0].split("-").reverse().join("/")}</strong></h6>
                 </div>
             </div>
             {percent(Number(preco), Number(precoConcorrente))}

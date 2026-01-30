@@ -4,6 +4,7 @@ import { LuLoader, LuPencil, LuTrash, LuUpload } from "react-icons/lu";
 import { useBuscarUsuario, useCriarUsuario, useDeletarUsuario, useEditarUsuario } from "../../hooks/usuarioHooks";
 import { MainContext } from './../../contexts/MainContext';
 import { useBuscarNivel } from "../../hooks/nivelHooks";
+import img from "../../assets/img-error.png"
 
 const Usuarios = () => {
 
@@ -92,7 +93,13 @@ const Usuarios = () => {
                             <div className="flex gap-4 items-center">
                                 {
                                     linha.foto ? (
-                                        <Image src={linha.foto} className="w-12! h-12! rounded-full object-cover" />
+                                        <Image
+                                            src={linha.foto}
+                                            className="w-12! h-12! rounded-full object-cover"
+                                            onError={(e) => {
+                                                e.currentTarget.src = img
+                                            }}
+                                        />
                                     ) : (
                                         <div className="w-12 h-12 rounded-full bg-azul font-bold flex justify-center items-center text-white uppercase">
                                             {linha.nome.substring(0, 2)}
@@ -144,7 +151,15 @@ const Usuarios = () => {
                     className="w-8"
                     render={(_, linha) =>
                         linha.foto ? (
-                            <Image src={linha.foto} className="w-12! h-12! rounded-full object-cover" />
+                            <div className="w-8 h-8">
+                                <Image
+                                    src={linha.foto}
+                                    className="w-8! h-8! rounded-full object-cover"
+                                    onError={(e) => {
+                                        e.currentTarget.src = img
+                                    }}
+                                />
+                            </div>
                         ) : (
                             <div className="w-8 h-8 rounded-full bg-azul font-bold flex justify-center items-center text-white uppercase text-xs">
                                 {linha.nome.substring(0, 2)}

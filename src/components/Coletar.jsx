@@ -3,9 +3,10 @@ import { LuArrowLeft, LuCamera, LuImage, LuLoader, LuMapPin, LuMessageCircle } f
 import { Link, useParams } from "react-router";
 import Coleta from "./Coleta";
 import { useContext, useState } from "react";
-import { useBuscarUmaMissao, useEditarColeta, useEditarMissao, useFinalizarMissao } from "../hooks/missaoHooks";
+import { useBuscarUmaMissao, useEditarColeta, useFinalizarMissao } from "../hooks/missaoHooks";
 import { MainContext } from "../contexts/MainContext";
 import LeitorCodigoBarras from "./LeitorCodigoBarras";
+import img from "../assets/img-error.png";
 
 const Coletar = () => {
 
@@ -23,7 +24,7 @@ const Coletar = () => {
     const { mutateAsync: finalizarMissao, isPending: finalizarMissaoPending } = useFinalizarMissao();
 
     function editar(dados) {
-        editarColeta(dados, {
+        editarColeta({ ...dados, status: 'concluído' }, {
             onSuccess: (response) => {
                 api[response.type]({
                     description: response.description
@@ -56,6 +57,37 @@ const Coletar = () => {
         });
         setVerModal(false);
     }
+
+    function gerarCSV(missao) {
+        const concorrente = missao.concorrente;
+        const data = new Date(missao.updatedAt).toLocaleDateString("pt-BR");
+
+        let csv = "";
+        csv += `Concorrente: ${concorrente.nome}; Tipo: Loja ${concorrente.tipo}; Data: ${data}\n`;
+        csv += "Código;Código Concorrente;Nome;Preço Base;Preço Concorrente;Preço Desconto;Observação\n";
+
+        missao.produtos.forEach(produtoItem => {
+            const codigo = produtoItem.produto.codigo ?? "";
+            const codigoConcorrente = produtoItem.codigo ?? "";
+            const nome = produtoItem.produto.nome ?? "";
+            const precoBase = produtoItem.produto.preco ?? "";
+            const precoConcorrente = produtoItem.precoConcorrente ?? "";
+            const precoDesconto = produtoItem.precoConcorrentePromocao ?? "";
+            const observacao = produtoItem.observacao ?? "";
+            csv += `${codigo};${codigoConcorrente};${nome};${precoBase};${precoConcorrente};${precoDesconto};${observacao}\n`;
+        });
+
+        const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = `${concorrente.nome.trim()}_Loja-${concorrente.tipo}_${data}.csv`;
+        link.click();
+
+        URL.revokeObjectURL(url);
+    }
+
     return (
         <div className="p-4 bg-stone-100 h-dvh overflow-auto">
             <Link
@@ -71,7 +103,13 @@ const Coletar = () => {
                             <div className="flex gap-4 items-start">
                                 {
                                     missao.concorrente.foto ? (
-                                        <Image src={missao.concorrente.foto} className="w-10! h-10! rounded-full object-cover" />
+                                        <Image
+                                            src={missao.concorrente.foto}
+                                            className="w-10! h-10! rounded-full object-cover"
+                                            onError={(e) => {
+                                                e.currentTarget.src = img
+                                            }}
+                                        />
                                     ) : (
                                         <div className="w-10 h-10 rounded-full bg-azul font-bold flex justify-center items-center text-white uppercase">
                                             {missao.concorrente.nome.substring(0, 2)}
@@ -116,6 +154,18 @@ const Coletar = () => {
                             >
                                 Finalizar Missão
                             </Button>
+                            {
+                                missao.status == "concluído" && (
+                                    <Button
+                                        className="mt-4 w-full"
+                                        type="primary"
+                                        size="large"
+                                        onClick={() => gerarCSV(missao)}
+                                    >
+                                        Exportar dados
+                                    </Button>
+                                )
+                            }
                         </div>
                         <div className="mt-4 lg:mt-0 flex flex-col gap-2 lg:gap-4 lg:flex-1">
                             {
@@ -123,7 +173,7 @@ const Coletar = () => {
                                     <div
                                         key={p.id}
                                         onClick={() => {
-                                            if(missao.status == "concluído"){
+                                            if (missao.status == "concluído") {
                                                 api.info({
                                                     description: "Esta missão já foi encerrada."
                                                 })
@@ -133,6 +183,8 @@ const Coletar = () => {
                                             formEditar.setFieldsValue({
                                                 id: p.id,
                                                 precoConcorrente: p.precoConcorrente,
+                                                precoConcorrentePromocao: p.precoConcorrentePromocao,
+                                                observacao: p.observacao,
                                                 codigo: p.codigo
                                             });
                                             setVerColeta(true);
@@ -142,8 +194,10 @@ const Coletar = () => {
                                             {...p.produto}
                                             foto={p.foto}
                                             precoConcorrente={p.precoConcorrente}
+                                            precoConcorrentePromocao={p.precoConcorrentePromocao}
                                             status={p.status}
                                             updatedAt={p.updatedAt}
+                                            createdAt={p.createdAt}
                                         />
                                     </div>
                                 ))
@@ -220,8 +274,14 @@ const Coletar = () => {
                         </Upload>
                     </Form.Item>
                     <Form.Item
-                        label="Preço encontrado"
+                        label="Preço cheio"
                         name="precoConcorrente"
+                    >
+                        <InputNumber prefix="R$" className="w-full!" />
+                    </Form.Item>
+                    <Form.Item
+                        label="Preço promoção"
+                        name="precoConcorrentePromocao"
                     >
                         <InputNumber prefix="R$" className="w-full!" />
                     </Form.Item>
@@ -237,6 +297,12 @@ const Coletar = () => {
                                 onClick={() => setLerCodigo(true)}
                             />
                         </Space.Compact>
+                    </Form.Item>
+                    <Form.Item
+                        label="Observação"
+                        name="observacao"
+                    >
+                        <Input.TextArea />
                     </Form.Item>
 
                     <div className="flex gap-4 *:flex-1">

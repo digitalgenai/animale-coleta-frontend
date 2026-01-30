@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { LuPencil, LuTrash, LuUpload } from "react-icons/lu";
 import { useBuscarConcorrente, useCriarConcorrente, useDeletarConcorrente, useEditarConcorrente } from "../../hooks/concorrenteHooks";
 import { MainContext } from './../../contexts/MainContext';
+import img from "../../assets/img-error.png"
 
 const Concorrentes = () => {
 
@@ -93,7 +94,13 @@ const Concorrentes = () => {
 
                                 {
                                     linha.foto ? (
-                                        <Image src={linha.foto} className="w-12! h-12! rounded-full object-cover" />
+                                        <Image
+                                            src={linha.foto}
+                                            className="w-12! h-12! rounded-full object-cover"
+                                            onError={(e) => {
+                                                e.currentTarget.src = img
+                                            }}
+                                        />
                                     ) : (
                                         <div className="w-12 h-12 rounded-full bg-azul font-bold flex justify-center items-center text-white uppercase">
                                             {linha.nome.substring(0, 2)}
@@ -149,7 +156,15 @@ const Concorrentes = () => {
                     className="w-8"
                     render={(_, linha) =>
                         linha.foto ? (
-                            <Image src={linha.foto} className="w-12! h-12! rounded-full object-cover" />
+                            <div className="w-8 h-8">
+                                <Image
+                                    src={linha.foto}
+                                    className="w-8! h-8! rounded-full object-cover"
+                                    onError={(e) => {
+                                        e.currentTarget.src = img
+                                    }}
+                                />
+                            </div>
                         ) : (
                             <div className="w-8 h-8 rounded-full bg-azul font-bold flex justify-center items-center text-white uppercase text-xs">
                                 {linha.nome.substring(0, 2)}

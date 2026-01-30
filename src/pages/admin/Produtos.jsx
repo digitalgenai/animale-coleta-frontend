@@ -4,6 +4,7 @@ import { LuImage, LuPencil, LuTrash, LuUpload } from "react-icons/lu";
 import { useBuscarProduto, useCriarProduto, useDeletarProduto, useEditarProduto, useImportarProduto } from "../../hooks/produtoHooks";
 import { MainContext } from './../../contexts/MainContext';
 import * as XLSX from 'xlsx';
+import img from "../../assets/img-error.png"
 
 const Produtos = () => {
 
@@ -191,7 +192,13 @@ const Produtos = () => {
                             <div className="flex gap-4 items-start">
                                 {
                                     linha.foto ? (
-                                        <Image src={linha.foto} className="w-10! h-10! rounded-full object-cover" />
+                                        <Image
+                                            src={linha.foto}
+                                            className="w-10! h-10! rounded-full object-cover"
+                                            onError={(e) => {
+                                                e.currentTarget.src = img
+                                            }}
+                                        />
                                     ) : (
                                         <div className="w-12 h-12 rounded-lg bg-stone-200 font-bold flex justify-center items-center text-stone-600 uppercase">
                                             <LuImage />
@@ -241,7 +248,15 @@ const Produtos = () => {
                     className="w-8"
                     render={(_, linha) =>
                         linha.foto ? (
-                            <Image src={linha.foto} className="w-12! h-12! rounded-full object-cover" />
+                            <div className="w-8 h-8">
+                                <Image
+                                    src={linha.foto}
+                                    className="w-8! h-8! rounded-full object-cover"
+                                    onError={(e) => {
+                                        e.currentTarget.src = img
+                                    }}
+                                />
+                            </div>
                         ) : (
                             <div className="w-8 h-8 rounded-full bg-azul font-bold flex justify-center items-center text-white uppercase text-xs">
                                 {linha.nome.substring(0, 2)}

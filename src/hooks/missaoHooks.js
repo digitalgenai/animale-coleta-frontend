@@ -35,7 +35,11 @@ export const useBuscarUlmimasMissao = () => {
 export const useCriarMissao = () => {
     return useMutation({
         mutationFn: async (dados) => {
-            const response = await AXIOS.post('/missao', dados);
+            const response = await AXIOS.post('/missao', dados, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
             return response.data;
         },
         onSuccess: () => {

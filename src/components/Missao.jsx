@@ -1,6 +1,6 @@
 import { Image, Tag } from "antd";
-import { LuMapPin, LuShoppingCart } from "react-icons/lu";
 import { Link } from "react-router";
+import img from "../assets/img-error.png"
 
 const Missao = ({ id, concorrente, produtos, titulo, criadaEm }) => {
     return (
@@ -16,8 +16,7 @@ const Missao = ({ id, concorrente, produtos, titulo, criadaEm }) => {
                                 src={concorrente.foto}
                                 className="w-18! h-18! rounded-full object-cover"
                                 onError={(e) => {
-                                    e.currentTarget.src =
-                                        'https://media.istockphoto.com/id/931643150/vector/picture-icon.jpg?s=612x612&w=0&k=20&c=St-gpRn58eIa8EDAHpn_yO4CZZAnGD6wKpln9l3Z3Ok='
+                                    e.currentTarget.src = img
                                 }}
                             />
                         ) : (
