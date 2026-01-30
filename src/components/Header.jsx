@@ -2,8 +2,9 @@ import { Image } from "antd";
 import logo from "../assets/icon.png";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthProvider";
-import { LuHouse, LuListTodo, LuLogOut, LuMenu, LuShoppingCart, LuStore, LuUser } from "react-icons/lu";
+import { LuHouse, LuListTodo, LuLogOut, LuShoppingCart, LuStore, LuUser } from "react-icons/lu";
 import { NavLink } from "react-router";
+import img from "../assets/img-error.png"
 
 const Header = () => {
 
@@ -80,7 +81,13 @@ const Header = () => {
                 </div>
                 {
                     usuario?.foto ? (
-                        <Image src={usuario.foto} className="w-10! h-10! rounded-full object-cover" />
+                        <Image
+                            src={usuario.foto}
+                            className="w-10! h-10! rounded-full object-cover"
+                            onError={(e) => {
+                                e.currentTarget.src = img
+                            }}
+                        />
                     ) : (
                         <div className="w-10 h-10 bg-azul rounded-full border-4 border-azul flex justify-center items-center text-white font-bold">
                             {usuario.nome.substring(0, 2)}

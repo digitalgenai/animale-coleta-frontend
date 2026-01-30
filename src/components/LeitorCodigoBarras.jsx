@@ -1,32 +1,41 @@
-import { Html5QrcodeScanner } from "html5-qrcode";
-import { useEffect } from "react";
+import { Scanner } from "@yudiel/react-qr-scanner";
+import { Button } from "antd";
+import { LuX } from "react-icons/lu";
 
 const LeitorCodigoBarras = ({ onScan, onClose }) => {
-    useEffect(() => {
-        const scanner = new Html5QrcodeScanner(
-            "barcode-reader",
-            {
-                fps: 10,
-                qrbox: { width: 250, height: 150 },
-                rememberLastUsedCamera: true
-            },
-            false
-        );
+  return (
+    <div className="flex flex-col gap-4 h-full">
+      {/* Scanner */}
+      <div className="flex-1 rounded-xl overflow-hidden bg-black">
+        <Scanner
+          constraints={{ facingMode: "environment" }} // câmera traseira
+          onScan={(result) => {
+            if (!result || result.length === 0) return;
 
-        scanner.render(
-            (codigo) => {
-                onScan(codigo);
-                scanner.clear();
-            },
-            () => { }
-        );
+            // pega o valor lido
+            const codigo = result[0].rawValue;
 
-        return () => {
-            scanner.clear().catch(() => { });
-        };
-    }, []);
+            if (codigo) {
+              onScan(codigo);
+            }
+          }}
+          onError={(error) => {
+            console.error("Erro ao ler código:", error);
+          }}
+        />
+      </div>
 
-    return <div id="barcode-reader" className="w-full" />;
+      {/* Botão fechar */}
+      <Button
+        type="primary"
+        size="large"
+        icon={<LuX />}
+        onClick={onClose}
+      >
+        Fechar
+      </Button>
+    </div>
+  );
 };
 
 export default LeitorCodigoBarras;
