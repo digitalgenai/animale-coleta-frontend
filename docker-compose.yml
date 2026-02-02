@@ -1,0 +1,9 @@
+services:
+  front:
+    build: .
+    container_name: animale-coleta-frontend
+    env_file:
+      - .env
+    ports:
+      - "3000:80"
+    restart: unless-stopped
